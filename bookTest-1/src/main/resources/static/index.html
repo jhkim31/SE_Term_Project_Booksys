@@ -6,13 +6,18 @@
 </head>
 <body>
 	<h1>Hello World</h1>
-	<button id="a">data get from /String</button>
-	<button id="b">data get from /Json</button>
+	<button id="get_string">data get from /String</button>
+	<button id="get_json">data get from /Json</button>
+	<button id = "get_vector">get table data from db</button>
+	<button id = "reservation">reservation</button>
 	<div id = "res"></div>
 	<div id="res"></div>
+	<a href = "/booking/index.html">bookingTab</a>
 	<script>
-	a = document.getElementById('a')
-	b = document.getElementById('b')
+	a = document.getElementById('get_string')
+	b = document.getElementById('get_json')
+	c = document.getElementById('get_vector')
+	d = document.getElementById('reservation')
 	a.addEventListener("click", () => {
 		fetch('/String')
 		.then(e => {
@@ -29,6 +34,22 @@
 		fetch('/Json')
 		.then(e => e.json())
 		.then(data => console.log(data))
+	})
+	
+	c.addEventListener('click', () =>{
+		fetch('/booking/tableNumbers')
+		.then(e => e.json())
+		.then(data => console.log(data))
+	})
+	
+	d.addEventListener('click', () => {
+		covers = 1
+		
+		url = '/reservation' + 
+		
+		fetch('/reservation?covers=1', {
+			method: 'POST'
+		})
 	})
 	</script>
 </body>
