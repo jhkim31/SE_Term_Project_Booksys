@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+	<h1>Hello World!</h1>
+	<button id="a">data get from /String</button>
+	<button id="b">data get from /Json</button>
+	<div id = "res"></div>
+	<div id="res"></div>
+	<script>
+	a = document.getElementById('a')
+	b = document.getElementById('b')
+	a.addEventListener("click", () => {
+		fetch('/String')
+		.then(e => {
+			return Promise.all([e.ok, e.text()])
+			})
+		.then(([responseOk, body]) => {
+		console.log(body)
+		document.getElementById("res").innerHTML = body
+	})
+	})
+	
+	
+	b.addEventListener("click", () => {
+		fetch('/Json')
+		.then(e => e.json())
+		.then(data => console.log(data))
+	})
+	</script>
+</body>
+</html>
