@@ -45,14 +45,14 @@
 	})
 	
 	c.addEventListener('click', () =>{
-		fetch('/booking/tableNumbers')
+		fetch('/get_table')
 		.then(e => e.json())
 		.then(data => console.log(data))
 	})
 	
 	d.addEventListener('click', () => {
 
-		url = '/reservation?' +
+		url = '/new_reservation?' +
 				'covers=' + document.getElementById('covers').value +
 				'&date=' + document.getElementById('date').value + 
 				'&time=' + document.getElementById('time').value + 

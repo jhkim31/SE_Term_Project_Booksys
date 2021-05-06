@@ -29,12 +29,12 @@ public class testController {
 		return js;
 	}
 	
-	@RequestMapping("/booking/tableNumbers")
+	@RequestMapping("/get_table")
 	public Vector returnTableNumbers() {
 		return ba.getTableNumber();
 	}
 	
-	@PostMapping("/reservation")
+	@PostMapping("/new_reservation")
 	public int setReservation(
 			@RequestParam int covers,
 			@RequestParam String date,
