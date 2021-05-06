@@ -89,8 +89,7 @@ public class BookingMapper
 						 Time arrivalTime)
   {
     int oid = Database.getInstance().getId() ;
-    performUpdate("INSERT INTO Reservation " + "VALUES ('"
-		  + oid + "', '"
+    performUpdate("INSERT INTO Reservation (covers, date, time, table_id, customer_id, arrivalTime)" + "VALUES ('"
 		  + covers + "', '"
 		  + date + "', '"
 		  + time + "', '"

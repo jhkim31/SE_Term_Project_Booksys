@@ -9,15 +9,24 @@
 	<button id="get_string">data get from /String</button>
 	<button id="get_json">data get from /Json</button>
 	<button id = "get_vector">get table data from db</button>
-	<button id = "reservation">reservation</button>
-	<div id = "res"></div>
-	<div id="res"></div>
+	<br>
+	<div>
+		<input type = "text" id = "covers" value = "covers ex) 1"><br>
+		<input type = "text" id = "date" value = "date ex) yyyy-MM-dd"><br>
+		<input type = "text" id = "time" value = "time ex) hh:mm:ss"><br>
+		<input type = "text" id = "tno" value = "table number ex) 1"><br>
+		<input type = "text" id = "name" value = "name ex) kim"><br>
+		<input type = "text" id = "phone" value = "phone ex) 010"><br>
+		<button id = "reservation">reservation</button><br>
+	</div>
 	<a href = "/booking/index.html">bookingTab</a>
 	<script>
 	a = document.getElementById('get_string')
 	b = document.getElementById('get_json')
 	c = document.getElementById('get_vector')
+	
 	d = document.getElementById('reservation')
+	
 	a.addEventListener("click", () => {
 		fetch('/String')
 		.then(e => {
@@ -25,7 +34,6 @@
 			})
 		.then(([responseOk, body]) => {
 		console.log(body)
-		document.getElementById("res").innerHTML = body
 	})
 	})
 	
@@ -43,11 +51,16 @@
 	})
 	
 	d.addEventListener('click', () => {
-		covers = 1
-		
-		url = '/reservation' + 
-		
-		fetch('/reservation?covers=1', {
+
+		url = '/reservation?' +
+				'covers=' + document.getElementById('covers').value +
+				'&date=' + document.getElementById('date').value + 
+				'&time=' + document.getElementById('time').value + 
+				'&tno=' + document.getElementById('tno').value + 
+				'&name=' + document.getElementById('name').value + 
+				'&phone=' + document.getElementById('phone').value 
+
+		fetch(url, {
 			method: 'POST'
 		})
 	})

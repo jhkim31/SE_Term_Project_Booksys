@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.A;
 import org.json.simple.JSONObject;
+
+import java.sql.Date;
+import java.sql.Time;
 import java.util.*;
 
 
@@ -33,10 +36,20 @@ public class testController {
 	
 	@PostMapping("/reservation")
 	public int setReservation(
-			@RequestParam int covers
+			@RequestParam int covers,
+			@RequestParam String date,
+			@RequestParam String time,
+			@RequestParam int tno,
+			@RequestParam String name,
+			@RequestParam String phone
 			) {
 		System.out.println(covers);
-		ba.addReservation();
+		System.out.println(date);
+		System.out.println(time);
+		System.out.println(tno);
+		System.out.println(name);
+		System.out.println(phone);
+		ba.addReservation(covers, date, time, tno,name,phone);
 		return covers;		
 	}
 	
