@@ -4,18 +4,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 
+
 import com.example.demo.A;
 import org.json.simple.JSONObject;
 
 import java.sql.Date;
 import java.sql.Time;
 import java.util.*;
+import javax.servlet.http.HttpServletRequest;
 
 
 @RestController
 public class testController {
-	BookingApi ba = new BookingApi();
-
+	BookingApi ba = new BookingApi(); 
+	
 	@RequestMapping("/String")
 	public String root_test() throws Exception {
 		A a = new A();
@@ -29,13 +31,13 @@ public class testController {
 		return js;
 	}
 	
-	@RequestMapping("/get_table")
+	@RequestMapping("/booking/get_table")
 	public Vector returnTableNumbers() {
 		return ba.getTableNumber();
 	}
 	
-	@PostMapping("/new_reservation")
-	public int setReservation(
+	@PostMapping("/booking/new_reservation")
+	public boolean setReservation(
 			@RequestParam int covers,
 			@RequestParam String date,
 			@RequestParam String time,
@@ -48,9 +50,20 @@ public class testController {
 		System.out.println(time);
 		System.out.println(tno);
 		System.out.println(name);
-		System.out.println(phone);
-		ba.addReservation(covers, date, time, tno,name,phone);
-		return covers;		
+		System.out.println(phone);		
+		return ba.addReservation(covers, date, time, tno,name,phone); 		
 	}
+	
+	@RequestMapping(value = "/booking/get_reservation_list")
+	public Vector getReservationList(HttpServletRequest request) {
+		System.out.println(request.getParameter("date"));
+		return ba.getReservationList(request.getParameter("date"));
+	}
+	
+	@PostMapping("/booking/cancel_reservation")
+	public boolean cancelReservation() {	
+		return ba.cancelReservation(); 		
+	}
+	
 	
 }

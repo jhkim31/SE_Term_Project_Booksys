@@ -38,7 +38,7 @@ public class BookingSystem {
 	private BookingSystem() {
 		today = new Date(Calendar.getInstance().getTimeInMillis());
 		restaurant = new Restaurant();
-		currentBookings = restaurant.getBookings(Date.valueOf("2021-05-04"));
+		currentBookings = restaurant.getBookings(today);
 	}
 
 	// Observer: this is `Subject/ConcreteSubject'
@@ -71,15 +71,39 @@ public class BookingSystem {
 		notifyObservers();
 	}
 
-	public void makeReservation(int covers, Date date, Time time, int tno, String name, String phone) {
+	public boolean makeReservation(int covers, Date date, Time time, int tno, String name, String phone) {
 		try {
-			if (!doubleBooked(time, tno, null) && !overflow(tno, covers)) {
-				Booking b = restaurant.makeReservation(covers, date, time, tno, name, phone);
-				currentBookings.addElement(b);
-				notifyObservers();
-			}
+//			if (!doubleBooked(time, tno, null) && !overflow(tno, covers)) {
+//			Booking b = restaurant.makeReservation(covers, date, time, tno, name, phone);
+//			currentBookings.addElement(b);
+//			notifyObservers();
+//			}
+			/*
+			 * 이중예약, 테이블 정원 초과 예약시 체크하는 조건 필요 (현재는 저 메소드를 사용하면 버그 생김, 기존 메소드 활용하는게 편할듯)
+			 */
+//			Booking b = restaurant.makeReservation(covers, date, time, tno, name, phone);
+//			currentBookings.addElement(b);
+			restaurant.makeReservation(covers, date, time, tno, name, phone);
+			return true;
 		} catch (Exception e) {
 			System.out.println(e);
+			return false;
+		}
+	}
+	
+	public Vector getReservationList(Date date) {
+		Vector a = restaurant.getBookings(date);
+		selectedBooking = (Booking) a.get(0);
+		return a;
+	}
+	
+	public boolean removeReservation() {
+		try {
+			restaurant.removeBooking(selectedBooking);
+			return true;
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
 		}
 	}
 
@@ -108,7 +132,7 @@ public class BookingSystem {
 	public void cancel() {
 		if (selectedBooking != null) {
 			if (observerMessage("Are you sure?", true)) {
-				currentBookings.remove(selectedBooking);
+//				currentBookings.remove(selectedBooking);
 				restaurant.removeBooking(selectedBooking);
 				selectedBooking = null;
 				notifyObservers();
