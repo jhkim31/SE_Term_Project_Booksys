@@ -20,17 +20,17 @@
 	<div>
 		<input type="text" id="get_date" value="조회를 원하는 날짜"><br>
 		<button id = "get_reservation_list">조회</button>
-		
+		<br>
 		<input type="text" id="remove_reservation" value="삭제를 원하는 예약의 아이디"><br>
-		<button id = "remove_reservation">삭제</button>
+		<button id = "cancel_reservation">삭제</button>
 	</div>
 	<script>
 		a = document.getElementById('reservation')
 		b = document.getElementById('get_reservation_list')
-		c = document.getElementById('remove_reservation')
+		c = document.getElementById('cancel_reservation')
 		
 		a.addEventListener('click', () => {
-		url = '/booking/new_reservation?' +
+		url = '/reservation/new_reservation?' +
 				'covers=' + document.getElementById('covers').value +
 				'&date=' + document.getElementById('date').value + 
 				'&time=' + document.getElementById('time').value + 
@@ -46,7 +46,7 @@
 	})
 	
 	b.addEventListener("click", () => {
-		url = '/get_reservation_list?' + 
+		url = '/booking/get_booking_list?' + 
 			'date=' + document.getElementById("get_date").value
 		fetch(url)
 		.then(e => e.json())
@@ -54,7 +54,13 @@
 	})
 	
 	c.addEventListener('click', () => {
-		
+		url = '/reservation/cancel_reservation?' +
+			'index=' + document.getElementById("remove_reservation").value
+		fetch(url, {
+			method: 'POST'
+			})
+		.then(e => e.json())
+		.then(data => console.log(data))
 	})
 	</script>
 </body>

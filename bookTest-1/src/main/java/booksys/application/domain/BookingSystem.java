@@ -8,6 +8,7 @@
 
 package booksys.application.domain;
 
+
 import java.sql.Date;
 import java.sql.Time;
 import java.util.*;
@@ -23,7 +24,7 @@ public class BookingSystem {
 	Restaurant restaurant = null;
 	Vector currentBookings;
 	Booking selectedBooking;
-
+	
 	// Singleton:
 
 	private static BookingSystem uniqueInstance;
@@ -91,15 +92,14 @@ public class BookingSystem {
 		}
 	}
 	
-	public Vector getReservationList(Date date) {
-		Vector a = restaurant.getBookings(date);
-		selectedBooking = (Booking) a.get(0);
-		return a;
+	public Vector getBookingList(Date date) {
+		currentBookings = restaurant.getBookings(date);
+		return currentBookings;
 	}
 	
-	public boolean removeReservation() {
+	public boolean removeBooking(int index) {
 		try {
-			restaurant.removeBooking(selectedBooking);
+			restaurant.removeBooking((Booking)currentBookings.get(index));
 			return true;
 		} catch (Exception e) {
 			System.out.println(e);
@@ -115,30 +115,30 @@ public class BookingSystem {
 		}
 	}
 
-	public void selectBooking(int tno, Time time) {
-		selectedBooking = null;
-		Enumeration enums = currentBookings.elements();
-		while (enums.hasMoreElements()) {
-			Booking b = (Booking) enums.nextElement();
-			if (b.getTableNumber() == tno) {
-				if (b.getTime().before(time) && b.getEndTime().after(time)) {
-					selectedBooking = b;
-				}
-			}
-		}
-		notifyObservers();
-	}
+//	public void selectBooking(int tno, Time time) {
+//		selectedBooking = null;
+//		Enumeration enums = currentBookings.elements();
+//		while (enums.hasMoreElements()) {
+//			Booking b = (Booking) enums.nextElement();
+//			if (b.getTableNumber() == tno) {
+//				if (b.getTime().before(time) && b.getEndTime().after(time)) {
+//					selectedBooking = b;
+//				}
+//			}
+//		}
+//		notifyObservers();
+//	}
 
-	public void cancel() {
-		if (selectedBooking != null) {
-			if (observerMessage("Are you sure?", true)) {
-//				currentBookings.remove(selectedBooking);
-				restaurant.removeBooking(selectedBooking);
-				selectedBooking = null;
-				notifyObservers();
-			}
-		}
-	}
+//	public void cancel() {
+//		if (selectedBooking != null) {
+//			if (observerMessage("Are you sure?", true)) {
+////				currentBookings.remove(selectedBooking);
+//				restaurant.removeBooking(selectedBooking);
+//				selectedBooking = null;
+//				notifyObservers();
+//			}
+//		}
+//	}
 
 	public void recordArrival(Time time) {
 		if (selectedBooking != null) {

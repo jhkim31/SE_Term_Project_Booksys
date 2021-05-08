@@ -31,12 +31,12 @@ public class testController {
 		return js;
 	}
 	
-	@RequestMapping("/booking/get_table")
+	@RequestMapping("/get_table")
 	public Vector returnTableNumbers() {
 		return ba.getTableNumber();
 	}
 	
-	@PostMapping("/booking/new_reservation")
+	@PostMapping("/reservation/new_reservation")
 	public boolean setReservation(
 			@RequestParam int covers,
 			@RequestParam String date,
@@ -54,15 +54,17 @@ public class testController {
 		return ba.addReservation(covers, date, time, tno,name,phone); 		
 	}
 	
-	@RequestMapping(value = "/booking/get_reservation_list")
+	@RequestMapping(value = "/booking/get_booking_list")
 	public Vector getReservationList(HttpServletRequest request) {
 		System.out.println(request.getParameter("date"));
-		return ba.getReservationList(request.getParameter("date"));
+		return ba.getBookingList(request.getParameter("date"));
 	}
 	
-	@PostMapping("/booking/cancel_reservation")
-	public boolean cancelReservation() {	
-		return ba.cancelReservation(); 		
+	@PostMapping("/reservation/cancel_reservation")
+	public boolean cancelReservation(
+			@RequestParam int index
+			) {	
+		return ba.cancelReservation(index); 		
 	}
 	
 	

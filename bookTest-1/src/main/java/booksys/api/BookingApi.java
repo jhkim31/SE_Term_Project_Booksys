@@ -25,13 +25,13 @@ public class BookingApi {
 		return bs.makeReservation(covers, d, t, tno, name, phone);
 	}
 	
-	public Vector getReservationList(String date) {
+	public Vector getBookingList(String date) {
 		Date d = Date.valueOf(date);
-		return bs.getReservationList(d);
+		return bs.getBookingList(d);
 	}
 	
-	public boolean cancelReservation() {
-		return bs.removeReservation();
+	public boolean cancelReservation(int index) {
+		return bs.removeBooking(index);
 	}
 
 }

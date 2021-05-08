@@ -78,7 +78,7 @@ public class BookingMapper
     catch (SQLException e) {
       e.printStackTrace() ;
     }
-    return v ;
+    return v;
   }
   
   public PersistentReservation createReservation(int covers,
