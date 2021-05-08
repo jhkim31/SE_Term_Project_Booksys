@@ -67,5 +67,12 @@ public class testController {
 		return ba.cancelReservation(index); 		
 	}
 	
+	@PostMapping("/reservation/record_arrival")
+	public boolean recordArrival(
+			@RequestParam int index
+			) {	
+		return ba.recordArrival(index); 		
+	}
+	
 	
 }

@@ -140,16 +140,25 @@ public class BookingSystem {
 //		}
 //	}
 
-	public void recordArrival(Time time) {
-		if (selectedBooking != null) {
-			if (selectedBooking.getArrivalTime() != null) {
-				observerMessage("Arrival already recorded", false);
-			} else {
-				selectedBooking.setArrivalTime(time);
-				restaurant.updateBooking(selectedBooking);
-				notifyObservers();
-			}
+	public boolean recordArrival(int index) {
+		try {
+			Calendar now = Calendar.getInstance();
+			((Booking) currentBookings.get(index)).setArrivalTime(new Time(now.getTimeInMillis()));
+			restaurant.updateBooking((Booking) currentBookings.get(index));
+			return true;
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
 		}
+//		if (selectedBooking != null) {
+//			if (selectedBooking.getArrivalTime() != null) {
+//				observerMessage("Arrival already recorded", false);
+//			} else {
+//				selectedBooking.setArrivalTime(time);
+//				restaurant.updateBooking(selectedBooking);
+//				notifyObservers();
+//			}
+//		}
 	}
 
 	public void transfer(Time time, int tno) {

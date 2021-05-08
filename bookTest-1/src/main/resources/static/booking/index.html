@@ -23,11 +23,15 @@
 		<br>
 		<input type="text" id="remove_reservation" value="삭제를 원하는 예약의 아이디"><br>
 		<button id = "cancel_reservation">삭제</button>
+		
+		<input type="text" id="arrival_reservation" value="도착한 예약의 인덱스"><br>
+		<button id = "arrival_reservation_btn">도착</button>
 	</div>
 	<script>
 		a = document.getElementById('reservation')
 		b = document.getElementById('get_reservation_list')
 		c = document.getElementById('cancel_reservation')
+		d = document.getElementById('arrival_reservation_btn')
 		
 		a.addEventListener('click', () => {
 		url = '/reservation/new_reservation?' +
@@ -59,6 +63,14 @@
 		fetch(url, {
 			method: 'POST'
 			})
+		.then(e => e.json())
+		.then(data => console.log(data))
+	})
+	
+	d.addEventListener('click', () => {
+		url = '/reservation/record_arrival?' +
+		'index=' + document.getElementById('arrival_reservation').value
+		fetch(url, {method: 'POST'})
 		.then(e => e.json())
 		.then(data => console.log(data))
 	})
