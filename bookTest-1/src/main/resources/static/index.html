@@ -9,13 +9,15 @@
 	<button id="get_string">data get from /String</button>
 	<button id="get_json">data get from /Json</button>
 	<button id = "get_vector">get table data from db</button>
+	
 	<br>
 	<a href = "/booking/index.html">go to booking tab</a>
+	<a href = "/login/login.html">go to login</a>
 	<script>
 	a = document.getElementById('get_string')
 	b = document.getElementById('get_json')
 	c = document.getElementById('get_vector')	
-
+	
 	
 	a.addEventListener("click", () => {
 		fetch('/String')
@@ -37,6 +39,7 @@
 		.then(e => e.json())
 		.then(data => console.log(data))
 	})
+	
 	</script>
 </body>
 </html>

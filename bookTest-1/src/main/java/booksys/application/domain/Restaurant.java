@@ -19,12 +19,17 @@ class Restaurant
   BookingMapper  bm = BookingMapper.getInstance() ;
   CustomerMapper cm = CustomerMapper.getInstance() ;
   TableMapper    tm = TableMapper.getInstance() ;
+  LoginMapper	 lm = LoginMapper.getInstance();
   
   Vector getBookings(Date date)
   {
     return bm.getBookings(date) ;
   }
 
+  boolean getUser(String userId, String pw) 
+  {
+	 return lm.getUser(userId, pw);
+  }
   Customer getCustomer(String name, String phone)
   {
     return cm.getCustomer(name, phone) ;

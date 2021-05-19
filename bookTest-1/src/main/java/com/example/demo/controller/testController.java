@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 import booksys.api.BookingApi;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
@@ -72,5 +73,14 @@ public class testController {
 			@RequestParam int index
 			) {	
 		return ba.recordArrival(index); 		
+	}
+	
+	@PostMapping("/login/loginRequest")
+	public boolean getUser(
+			@RequestParam String userId,
+			@RequestParam String pw
+			) {
+		
+		return ba.getUser(userId, pw);
 	}
 }

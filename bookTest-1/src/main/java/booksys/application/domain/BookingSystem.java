@@ -160,6 +160,10 @@ public class BookingSystem {
 //			}
 //		}
 	}
+	
+	public boolean getUser(String userId, String pw) {
+		return restaurant.getUser(userId, pw);
+	}
 
 	public void transfer(Time time, int tno) {
 		if (selectedBooking != null) {
