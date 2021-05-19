@@ -37,5 +37,7 @@ public class BookingApi {
 	public boolean recordArrival(int index) {
 		return bs.recordArrival(index);
 	}
+	
+	
 
 }

@@ -26,12 +26,16 @@
 		<br>
 		<input type="text" id="arrival_reservation" value="도착한 예약의 인덱스 ex) 0"><br>
 		<button id = "arrival_reservation_btn">도착</button>
+		
+		<button id = "test1">test1</button>
+		
 	</div>
 	<script>
 		a = document.getElementById('reservation')
 		b = document.getElementById('get_reservation_list')
 		c = document.getElementById('cancel_reservation')
 		d = document.getElementById('arrival_reservation_btn')
+		test1 = document.getElementById("test1")
 		
 		a.addEventListener('click', () => {
 		url = '/reservation/new_reservation?' +
@@ -74,6 +78,15 @@
 		.then(e => e.json())
 		.then(data => console.log(data))
 	})
+	
+	test1.addEventListener('click', () => {
+		console.log(11)
+		fetch('/Json')
+		.then (e => e.json())
+		.then(d => console.log(d))
+	})
+	
+	
 	</script>
 </body>
 </html>

@@ -13,7 +13,7 @@ import java.sql.Time;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 
-
+@CrossOrigin(origins = "*")
 @RestController
 public class testController {
 	BookingApi ba = new BookingApi(); 
@@ -73,6 +73,4 @@ public class testController {
 			) {	
 		return ba.recordArrival(index); 		
 	}
-	
-	
 }
