@@ -74,16 +74,6 @@ public class BookingSystem {
 
 	public boolean makeReservation(int covers, Date date, Time time, int tno, String name, String phone) {
 		try {
-//			if (!doubleBooked(time, tno, null) && !overflow(tno, covers)) {
-//			Booking b = restaurant.makeReservation(covers, date, time, tno, name, phone);
-//			currentBookings.addElement(b);
-//			notifyObservers();
-//			}
-			/*
-			 * 이중예약, 테이블 정원 초과 예약시 체크하는 조건 필요 (현재는 저 메소드를 사용하면 버그 생김, 기존 메소드 활용하는게 편할듯)
-			 */
-//			Booking b = restaurant.makeReservation(covers, date, time, tno, name, phone);
-//			currentBookings.addElement(b);
 			restaurant.makeReservation(covers, date, time, tno, name, phone);
 			return true;
 		} catch (Exception e) {
@@ -115,31 +105,6 @@ public class BookingSystem {
 		}
 	}
 
-//	public void selectBooking(int tno, Time time) {
-//		selectedBooking = null;
-//		Enumeration enums = currentBookings.elements();
-//		while (enums.hasMoreElements()) {
-//			Booking b = (Booking) enums.nextElement();
-//			if (b.getTableNumber() == tno) {
-//				if (b.getTime().before(time) && b.getEndTime().after(time)) {
-//					selectedBooking = b;
-//				}
-//			}
-//		}
-//		notifyObservers();
-//	}
-
-//	public void cancel() {
-//		if (selectedBooking != null) {
-//			if (observerMessage("Are you sure?", true)) {
-////				currentBookings.remove(selectedBooking);
-//				restaurant.removeBooking(selectedBooking);
-//				selectedBooking = null;
-//				notifyObservers();
-//			}
-//		}
-//	}
-
 	public boolean recordArrival(int index) {
 		try {
 			Calendar now = Calendar.getInstance();
@@ -150,15 +115,6 @@ public class BookingSystem {
 			System.out.println(e);
 			return false;
 		}
-//		if (selectedBooking != null) {
-//			if (selectedBooking.getArrivalTime() != null) {
-//				observerMessage("Arrival already recorded", false);
-//			} else {
-//				selectedBooking.setArrivalTime(time);
-//				restaurant.updateBooking(selectedBooking);
-//				notifyObservers();
-//			}
-//		}
 	}
 	
 	public boolean getUser(String userId, String pw) {
