@@ -1,0 +1,19 @@
+	#booking_list_box{
+		z-index:999999;
+	}
+	td{
+		border:1px solid black;
+		collapse: none;
+		
+	}
+	.basicTable{
+		color:red;
+		width: 20px;
+		background:yellow;
+	}
+	
+	.bookingSection{
+		color:red;
+		background:red;
+	}
+
