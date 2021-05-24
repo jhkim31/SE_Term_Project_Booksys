@@ -133,6 +133,31 @@ public class BookingSystem {
 			notifyObservers();
 		}
 	}
+	
+	public Vector getMenuList() {
+		Vector a = restaurant.getMenu();
+		return a;
+	}
+
+	public void addMenu(int mid, String name, int price) {
+		restaurant.addMenu(mid, name, price);
+	}
+	
+	public void deleteMenu(Menu m) {
+		restaurant.deleteMenu(m);
+	}
+	
+	public void updateMenu(Menu m) {
+		restaurant.updateMenu(m);
+	}
+	
+	public Menu findMenu(int mid) {
+		Vector menulist = restaurant.getMenu();
+		for (Object m : menulist) {
+			if(((Menu)m).getMid()==mid) return (Menu)m;
+		}
+		return null;
+	}
 
 	private boolean doubleBooked(Time startTime, int tno, Booking ignore) {
 		boolean doubleBooked = false;

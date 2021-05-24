@@ -1,8 +1,6 @@
 package com.example.demo.controller;
 import booksys.api.BookingApi;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -82,5 +80,25 @@ public class testController {
 			) {
 		
 		return ba.getUser(userId, pw);
+	}
+	
+
+	@RequestMapping("/menu/get_menu_list")
+	public Vector getMenuList() {
+		return ba.getMenuList();
+	}
+
+	@RequestMapping("/menu/add_menu")
+	public boolean addMenu(@RequestParam int mid, @RequestParam String name, @RequestParam int price) {
+		System.out.println(mid);
+		System.out.println(name);
+		System.out.println(price);
+		return ba.addMenu(mid, name, price);
+	}
+
+	@RequestMapping("/menu/delete_menu")
+	public boolean deleteMenu(@RequestParam int mid) {
+		System.out.println(mid);
+		return ba.deleteMenu(mid);
 	}
 }

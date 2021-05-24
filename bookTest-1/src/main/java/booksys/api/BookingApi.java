@@ -41,5 +41,44 @@ public class BookingApi {
 	public boolean getUser(String userId, String pw) {
 		return bs.getUser(userId, pw);
 	}
+	
+	public Vector getMenuList() {
+		return bs.getMenuList();
+	}
+	
+	public boolean addMenu(int mid, String name, int price) {
+		try {
+			bs.addMenu(mid, name, price);
+		}catch(Exception e) { 
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	public boolean deleteMenu(int mid) {
+		Menu m = bs.findMenu(mid);
+		if(m != null) {
+			try {
+				bs.deleteMenu(m);
+			}catch(Exception e) { 
+				e.printStackTrace();
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean UpdateMenu(int mid, String name, int price) {
+		Menu m = new Menu(mid, name, price);
+		if(m != null) {
+			try {
+				bs.updateMenu(m);
+			}catch(Exception e) { 
+				e.printStackTrace();
+				return false;
+			}
+		}
+		return true;
+	}
 
 }

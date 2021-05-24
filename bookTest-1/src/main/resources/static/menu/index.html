@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+	<h1>menu</h1>
+	<div>
+		<button id="get_vector2">get menu data from db</button>
+		<br>
+		
+		<input type="text" id="mid" value="menu_id ex) 3"><br>
+		<input type="text" id="name" value="name ex) 순댓국"><br>
+		<input type="text" id="price" value="price ex) 6000"><br>
+
+		<button id="addMenu">메뉴 추가</button>
+		<br>
+	</div>
+	
+	<div>
+		<input type="text" id="mid" value="삭제를 원하는 메뉴의 id"><br>
+		<button id = "deleteMenu">메뉴 삭제</button>
+	</div>
+	
+	<script>
+		a = document.getElementById('get_vector2')
+		b = document.getElementById('addMenu')
+		c = document.getElementById('deleteMenu')
+		
+		
+		a.addEventListener('click', () =>{
+		fetch('/menu/get_menu_list')
+		.then(e => e.json())
+		.then(data => console.log(data))
+		})
+		
+		b.addEventListener('click', () => {
+		url = '/menu/add_menu?' +
+				'mid=' + document.getElementById('mid').value +
+				'&name=' + document.getElementById('name').value + 
+				'&price=' + document.getElementById('price').value
+		fetch(url, {
+			method: 'POST'
+		})
+		.then(e => e.json())
+		.then(data => console.log(data))
+		})
+		
+		c.addEventListener('click', () => {
+		url = '/menu/delete_menu?' +
+				'mid=' + document.getElementById('mid').value
+		fetch(url, {
+			method: 'POST'
+		})
+		.then(e => e.json())
+		.then(data => console.log(data))
+		})
+		
+		
+	</script>
+</body>
+</html>
