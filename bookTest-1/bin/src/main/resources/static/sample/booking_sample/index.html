@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+	<h1>booking</h1>
+	<div>
+		<input type="text" id="covers" value="covers ex) 1"><br>
+		<input type="text" id="date" value="date ex) 2021-05-09"><br>
+		<input type="text" id="time" value="time ex) 19:30:00"><br>
+		<input type="text" id="tno" value="table number ex) 2"><br>
+		<input type="text" id="name" value="name ex) kim"><br> <input
+			type="text" id="phone" value="phone ex) 0106398"><br>
+		<button id="reservation">reservation</button>
+		<br>
+	</div>
+	
+	<div>
+		<input type="text" id="get_date" value="조회를 원하는 날짜 ex)2021-05-09"><br>
+		<button id = "get_reservation_list">조회</button>
+		<br>
+		<input type="text" id="remove_reservation" value="삭제를 원하는 예약의 아이디 ex) 0"><br>
+		<button id = "cancel_reservation">삭제</button>
+		<br>
+		<input type="text" id="arrival_reservation" value="도착한 예약의 인덱스 ex) 0"><br>
+		<button id = "arrival_reservation_btn">도착</button>
+		
+		<button id = "test1">test1</button>
+		
+	</div>
+	<script>
+		a = document.getElementById('reservation')
+		b = document.getElementById('get_reservation_list')
+		c = document.getElementById('cancel_reservation')
+		d = document.getElementById('arrival_reservation_btn')
+		test1 = document.getElementById("test1")
+		
+		a.addEventListener('click', () => {
+		url = '/reservation/new_reservation?' +
+				'covers=' + document.getElementById('covers').value +
+				'&date=' + document.getElementById('date').value + 
+				'&time=' + document.getElementById('time').value + 
+				'&tno=' + document.getElementById('tno').value + 
+				'&name=' + document.getElementById('name').value + 
+				'&phone=' + document.getElementById('phone').value 
+
+		fetch(url, {
+			method: 'POST'
+		})
+		.then(e => e.json())
+		.then(data => console.log(data))
+	})
+	
+	b.addEventListener("click", () => {
+		url = '/booking/get_booking_list?' + 
+			'date=' + document.getElementById("get_date").value
+		fetch(url)
+		.then(e => e.json())
+		.then(data => console.log(data))
+	})
+	
+	c.addEventListener('click', () => {
+		url = '/reservation/cancel_reservation?' +
+			'index=' + document.getElementById("remove_reservation").value
+		fetch(url, {
+			method: 'POST'
+			})
+		.then(e => e.json())
+		.then(data => console.log(data))
+	})
+	
+	d.addEventListener('click', () => {
+		url = '/reservation/record_arrival?' +
+		'index=' + document.getElementById('arrival_reservation').value
+		fetch(url, {method: 'POST'})
+		.then(e => e.json())
+		.then(data => console.log(data))
+	})
+	
+	test1.addEventListener('click', () => {
+		console.log(11)
+		fetch('/Json')
+		.then (e => e.json())
+		.then(d => console.log(d))
+	})
+	
+	
+	</script>
+</body>
+</html>
