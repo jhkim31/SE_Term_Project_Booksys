@@ -13,4 +13,8 @@ public class LoginApi {
 	public LoginApi() {
 		bs = BookingSystem.getInstance();
 	}
+	
+	public boolean checkUser(String userId, String pw) {
+		return bs.checkUser(userId, pw);
+	}
 }

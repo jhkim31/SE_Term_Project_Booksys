@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 import booksys.api.BookingApi;
+import booksys.api.LoginApi;
 
 import org.springframework.web.bind.annotation.*;
 
@@ -14,8 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 
 @CrossOrigin(origins = "*")
 @RestController
-public class testController {
+public class RestApiController {
 	BookingApi ba = new BookingApi(); 
+
 	
 	@RequestMapping("/String")
 	public String root_test() throws Exception {
@@ -71,15 +73,6 @@ public class testController {
 			@RequestParam int index
 			) {	
 		return ba.recordArrival(index); 		
-	}
-	
-	@PostMapping("/login/loginRequest")
-	public boolean getUser(
-			@RequestParam String userId,
-			@RequestParam String pw
-			) {
-		
-		return ba.getUser(userId, pw);
 	}
 	
 

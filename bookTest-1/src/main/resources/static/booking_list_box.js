@@ -1,11 +1,7 @@
 /**
  * 
  */
-window.onload = () => {
-	loadBookingBox()
-}
-
-window.loadBookingBox = () => {
+window.addEventListener('load', () => {
 	console.log(1)
 	document.getElementById('booking_list_box').innerHTML =
 		`
@@ -88,7 +84,9 @@ window.loadBookingBox = () => {
 			})
 
 		})
-}
+})
+
+
 
 
 

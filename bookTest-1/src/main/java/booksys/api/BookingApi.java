@@ -38,9 +38,6 @@ public class BookingApi {
 		return bs.recordArrival(index);
 	}
 
-	public boolean getUser(String userId, String pw) {
-		return bs.getUser(userId, pw);
-	}
 	
 	public Vector getMenuList() {
 		return bs.getMenuList();

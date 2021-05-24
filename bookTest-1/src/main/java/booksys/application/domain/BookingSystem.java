@@ -117,8 +117,8 @@ public class BookingSystem {
 		}
 	}
 	
-	public boolean getUser(String userId, String pw) {
-		return restaurant.getUser(userId, pw);
+	public boolean checkUser(String userId, String pw) {
+		return restaurant.checkUser(userId, pw);
 	}
 
 	public void transfer(Time time, int tno) {

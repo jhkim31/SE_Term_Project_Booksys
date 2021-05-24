@@ -1,0 +1,32 @@
+{
+	"folders": {},
+	"connections": {
+		"mariaDB-1799f0eec3a-4460bbd11bdd1a30": {
+			"provider": "mysql",
+			"driver": "mariaDB",
+			"name": "booksys",
+			"save-password": true,
+			"show-system-objects": true,
+			"read-only": false,
+			"configuration": {
+				"host": "211.214.35.45",
+				"port": "5004",
+				"database": "booksys",
+				"url": "jdbc:mysql://211.214.35.45:5004/booksys",
+				"type": "dev",
+				"auth-model": "native",
+				"handlers": {}
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false
+		}
+	}
+}

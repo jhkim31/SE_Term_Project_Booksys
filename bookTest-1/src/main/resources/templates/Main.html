@@ -21,56 +21,24 @@
 	integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
 	crossorigin="anonymous"></script>
 </head>
+<title>메인 페이지</title>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="/index.html">레스토랑 예약 시스템</a>
-			<button class="navbar-toggler" type="button"
-				data-bs-toggle="collapse" data-bs-target="#navbarNav"
-				aria-controls="navbarNav" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarNav">
-				<ul class="navbar-nav">
-					<!-- 
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="main.html">메인</a>
-              </li>
-               -->
-					<li class="nav-item"><a class="nav-link"
-						href="/MenuPage/menu.html">메뉴판 보기</a></li>
-
-					<li class="nav-item"><a class="nav-link"
-						href="/booking/showBooking/showBooking.html">예약 조회</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="/booking/BookingPage/booking.html">예약 하기</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="/booking/ChangeBookingPage/changeBooking.html">예약 변경</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="/booking/CancelBookingPage/cancelBooking.html">예약 취소</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="/ReviewPage/review.html">리뷰 작성</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="/ReviewPage/review.html">리뷰 조회</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-	<h1>Hello World</h1>
+	<div id = "top-navigation-bar"></div>
+	<h1>메인 페이지</h1>
 	<button id="get_string">data get from /String</button>
 	<button id="get_json">data get from /Json</button>
 	<button id="get_vector">get table data from db</button>
 
 	<br>
-	<a href="/sample/booking_sample/index.html">go to booking tab</a>
-	<a href="/sample/login_sample/login.html">go to login</a>
+	<a href="/sample/booking">go to booking tab</a>
+	<a href="/sample/menu">go to menu</a>
 
 	<form id="myForm">
 		<input type="time" id="appt" name="appt" min="18:00" max="22:00"
 			required step="1800"> <input type="submit" value="1"
 			id="getTime">
 	</form>
+	<script src = "/top_navigation.js"></script>
 	<script>
 	a = document.getElementById('get_string')
 	b = document.getElementById('get_json')

@@ -25,8 +25,8 @@ class Restaurant {
 		return bm.getBookings(date);
 	}
 
-	boolean getUser(String userId, String pw) {
-		return lm.getUser(userId, pw);
+	boolean checkUser(String userId, String pw) {
+		return lm.checkUser(userId, pw);
 	}
 
 	Customer getCustomer(String name, String phone) {

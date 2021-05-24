@@ -23,23 +23,21 @@ public class LoginMapper {
 		return uniqueInstance;
 	}
 
-	public boolean getUser(String userId, String pw) 
-	  {
-		  try
-		  {
-			  Statement stmt
-				= Database.getInstance().getConnection().createStatement() ;
-			      ResultSet rset
-				= stmt.executeQuery("SELECT * FROM Users WHERE userId='"
-						    + userId + "'") ;
-			      return rset.next();			   
-		  }
-		  catch (Exception e )
-		  {
-			  System.out.println(e);
-			  return false;
-		  }
-		 
-	  }
+	public boolean checkUser(String userId, String pw) {
+		try {
+			Statement stmt = Database.getInstance().getConnection().createStatement();
+			ResultSet rset = stmt.executeQuery("SELECT * FROM Users WHERE userId='" + userId + "'");
+			if (rset.next()) {
+				if (rset.getString(2).equals(pw)) {
+					return true;
+				}
+			}
+			return false;			
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
+
+	}
 
 }

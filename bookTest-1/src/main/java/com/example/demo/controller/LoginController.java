@@ -1,8 +1,7 @@
 package com.example.demo.controller;
 import booksys.api.BookingApi;
+import booksys.api.LoginApi;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -13,16 +12,33 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @CrossOrigin(origins = "*")
 @RestController
 public class LoginController {
-	BookingApi ba = new BookingApi(); 
+	LoginApi la = new LoginApi();
 	
-	@RequestMapping("/asdfasdf")
-	public String root_test() throws Exception {
-		A a = new A();
-		return a.returnString();
+	@PostMapping("/login/loginRequest")
+	public boolean loginRequest(
+			@RequestParam String userId,
+			@RequestParam String pw,
+			HttpServletRequest request
+			) {
+		HttpSession session = request.getSession();
+		boolean returnVal = la.checkUser(userId, pw); 
+		if (returnVal) {
+			session.setAttribute("id", userId);
+			return true;
+		} else {
+			return false;
+		}
+		 
+	}
+	@PostMapping("/logout")
+	public void logout(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.removeAttribute("id");
 	}
 	
 }
