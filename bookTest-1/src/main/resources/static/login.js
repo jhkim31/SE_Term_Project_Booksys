@@ -13,7 +13,5 @@ login_btn.addEventListener('click', () => {
 			} else {
 				alert("로그인에 실패하셨습니다");
 			}
-			
-		
 		})
 })
