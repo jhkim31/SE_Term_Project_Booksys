@@ -131,28 +131,20 @@ public class PageController {
 		return "/member/register.html";
 	}
 	
-	@RequestMapping(value = "/String2")
-	public String root_test2(HttpServletRequest request) throws Exception {
-		HttpSession session = request.getSession();	
-		session.setAttribute("id", "kim");
-		return "test2/index";
-	}
-
-	@RequestMapping(value = "/getSession")
-	public String root_test3(HttpServletRequest request) throws Exception {
+	@RequestMapping(value = "/admin_page")
+	public String admin_page(HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
 		String a = (String)session.getAttribute("id");
 		if (a != null) {
-			return "passPage";
+			if ( ((String)session.getAttribute("role")).equals("admin") ) {
+				return "member/adminPage.html";
+			} else {
+				return "/";
+			}			
 		} else {
-			return "login";
+			return "member/login.html";
 		}
 	}
 	
-	@RequestMapping(value = "/logout")
-	public String login(HttpServletRequest request) throws Exception {
-		HttpSession session = request.getSession();
-		session.removeAttribute("id");
-		return "login";
-	}
+	
 }

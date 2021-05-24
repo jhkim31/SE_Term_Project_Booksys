@@ -29,6 +29,9 @@ public class LoginController {
 		boolean returnVal = la.checkUser(userId, pw); 
 		if (returnVal) {
 			session.setAttribute("id", userId);
+			if (userId.equals("admin")) {
+				session.setAttribute("role", "admin");
+			}
 			return true;
 		} else {
 			return false;
@@ -39,6 +42,7 @@ public class LoginController {
 	public void logout(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		session.removeAttribute("id");
+		session.removeAttribute("role");
 	}
 	
 }

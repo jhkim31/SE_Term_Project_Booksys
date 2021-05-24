@@ -29,6 +29,8 @@ window.addEventListener('load', () => {
 					<li class="nav-item"><a class="nav-link"
 						href="/review">리뷰 작성</a></li>
 						<li class="nav-item"><a class="nav-link"><button id = "logoutBtn">로그 아웃</button></a></li>
+						<li class="nav-item"><a class="nav-link"
+						href="/admin_page">ADMIN PAGE</a></li>	
 				</ul>
 			</div>
 		</div>
