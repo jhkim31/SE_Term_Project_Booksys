@@ -1,9 +1,9 @@
+/**
+ * 
+ */
 window.onload = () => {
 	loadBookingBox()
 }
-
-
-
 
 window.loadBookingBox = () => {
 	console.log(1)
@@ -17,9 +17,10 @@ window.loadBookingBox = () => {
 `
 	a = document.getElementById('get_reservation_list')
 	a.addEventListener("click", () => {
-		for(i = 1; i < tableArr.length; i++){
-			for(j = 1; j < 14; j++){
+		for (i = 1; i < tableArr.length; i++) {
+			for (j = 1; j < 14; j++) {
 				tableArr[i][j].className = ""
+				tableArr[i][j].innerText = ""
 			}
 		}
 		url = '/booking/get_booking_list?' +
@@ -28,14 +29,19 @@ window.loadBookingBox = () => {
 			.then(e => e.json())
 			.then(data => {
 				console.log(data)
+				index = 0
 				data.forEach(e => {
 					for (i = 1; i < 14; i++) {
 						if (tableArr[0][i].innerText == e.time.slice(0, 5)) {
-							tableArr[e.table.number][i].className += " basicTable"
-							tableArr[e.table.number][i + 1].className += " basicTable"
-							tableArr[e.table.number][i + 2].className += " basicTable"
-							tableArr[e.table.number][i + 3].className += " basicTable"
-							break;
+							tableArr[e.table.number][i].className += "bookingSection"
+							tableArr[e.table.number][i].innerText = index;
+							tableArr[e.table.number][i + 1].className += "bookingSection"
+							tableArr[e.table.number][i + 1].innerText = index;
+							tableArr[e.table.number][i + 2].className += "bookingSection"
+							tableArr[e.table.number][i + 2].innerText = index;
+							tableArr[e.table.number][i + 3].className += "bookingSection"
+							tableArr[e.table.number][i + 3].innerText = index;
+							index++;
 						}
 					}
 
@@ -43,7 +49,7 @@ window.loadBookingBox = () => {
 			})
 	})
 
-	
+
 	table = document.getElementById("table1")
 	window.tableArr = []
 	row = []
@@ -80,8 +86,8 @@ window.loadBookingBox = () => {
 				}
 				tableArr.push(row)
 			})
+
 		})
-	console.log(tableArr)
 }
 
 
