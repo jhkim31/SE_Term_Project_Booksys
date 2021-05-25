@@ -82,8 +82,17 @@ public class BookingSystem {
 		}
 	}
 	
+	public Vector getReservationNumber(Date sD, Date eD) {
+		return restaurant.getReservationNumber(sD, eD);
+	}
+	
 	public Vector getBookingList(Date date) {
 		currentBookings = restaurant.getBookings(date);
+		return currentBookings;
+	}
+	
+	public Vector getAllBookingList() {
+		currentBookings = restaurant.getAllBookings();
 		return currentBookings;
 	}
 	

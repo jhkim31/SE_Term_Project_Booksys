@@ -126,6 +126,11 @@ public class PageController {
 		return "/member/login.html";
 	}
 	
+	@RequestMapping(value = "/table")
+	public String table() throws Exception {
+		return "/table.html";
+	}
+	
 	@RequestMapping(value = "/register_page")
 	public String register_page(HttpServletRequest request) throws Exception {
 		return "/member/register.html";
@@ -133,17 +138,18 @@ public class PageController {
 	
 	@RequestMapping(value = "/admin_page")
 	public String admin_page(HttpServletRequest request) throws Exception {
-		HttpSession session = request.getSession();
-		String a = (String)session.getAttribute("id");
-		if (a != null) {
-			if ( ((String)session.getAttribute("role")).equals("admin") ) {
-				return "member/adminPage.html";
-			} else {
-				return "/";
-			}			
-		} else {
-			return "member/login.html";
-		}
+//		HttpSession session = request.getSession();
+//		String a = (String)session.getAttribute("id");
+//		if (a != null) {
+//			if ( ((String)session.getAttribute("role")).equals("admin") ) {
+//				return "member/adminPage.html";
+//			} else {
+//				return "/";
+//			}			
+//		} else {
+//			return "member/login.html";
+//		}
+		return "member/adminPage.html";
 	}
 	
 	

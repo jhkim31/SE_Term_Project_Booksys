@@ -37,6 +37,7 @@ public class RestApiController {
 		return ba.getTableNumber();
 	}
 	
+	
 	@PostMapping("/reservation/new_reservation")
 	public boolean setReservation(
 			@RequestParam int covers,
@@ -60,6 +61,19 @@ public class RestApiController {
 		System.out.println(request.getParameter("date"));
 		return ba.getBookingList(request.getParameter("date"));
 	}
+	
+	@RequestMapping("/booking/get_reservation_number")
+	public Vector reservationNumber(HttpServletRequest request) {
+		String sDate = request.getParameter("sDate");
+		String eDate = request.getParameter("eDate");
+		return ba.getReservationNumber(sDate, eDate);
+	}
+	
+	@RequestMapping(value = "/booking/get_all_booking_list")
+	public Vector getAllReservationList(HttpServletRequest request) {
+		return ba.getAllBookingList();
+	}
+	
 	
 	@PostMapping("/reservation/cancel_reservation")
 	public boolean cancelReservation(

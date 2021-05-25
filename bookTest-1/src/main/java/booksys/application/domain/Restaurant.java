@@ -21,8 +21,16 @@ class Restaurant {
 	LoginMapper lm = LoginMapper.getInstance();
 	MenuMapper mm = MenuMapper.getInstance();
 
+	
+	public Vector getReservationNumber(Date sD, Date eD) {
+		return bm.getReservationNumber(sD, eD);
+	}
 	Vector getBookings(Date date) {
 		return bm.getBookings(date);
+	}
+	
+	Vector getAllBookings() {
+		return bm.getAllBookings();
 	}
 
 	boolean checkUser(String userId, String pw) {
