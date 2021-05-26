@@ -12,6 +12,7 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -35,6 +36,17 @@ public class RestApiController {
 	@RequestMapping("/get_table")
 	public Vector returnTableNumbers() {
 		return ba.getTableNumber();
+	}
+	
+	@RequestMapping(value = "/session_check")
+	public String sessionCheck(HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		String a = (String)session.getAttribute("id");
+		if (a != null) {
+			return (String)session.getAttribute("id");
+		} else {
+			return "false";
+		}
 	}
 	
 	

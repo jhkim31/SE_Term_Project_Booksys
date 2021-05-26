@@ -31,6 +31,8 @@ public class LoginController {
 			session.setAttribute("id", userId);
 			if (userId.equals("admin")) {
 				session.setAttribute("role", "admin");
+			} else {
+				session.setAttribute("role", "user");
 			}
 			return true;
 		} else {

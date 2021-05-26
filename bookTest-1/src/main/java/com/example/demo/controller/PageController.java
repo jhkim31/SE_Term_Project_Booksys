@@ -63,13 +63,15 @@ public class PageController {
 	
 	@RequestMapping(value = "/")
 	public String Main_page(HttpServletRequest request) throws Exception {
-		HttpSession session = request.getSession();
-		String a = (String)session.getAttribute("id");
-		if (a != null) {
-			return "/Main.html";
-		} else {
-			return "member/login.html";
-		}
+//		HttpSession session = request.getSession();
+//		String a = (String)session.getAttribute("id");
+//		if (a != null) {
+//			return "/Main.html";
+//		} else {
+//			return "member/login.html";
+//		}
+		
+		return "Main.html";
 		
 	}
 	
