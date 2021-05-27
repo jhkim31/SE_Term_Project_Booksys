@@ -126,9 +126,14 @@ public class BookingSystem {
 		}
 	}
 	
-	public boolean checkUser(String userId, String pw) {
+	public String checkUser(String userId, String pw) {
 		return restaurant.checkUser(userId, pw);
 	}
+	
+	public String kakaoLogin(String userId, String userName) {
+		return restaurant.kakaoLogin(userId, userName);
+	}
+	
 
 	public void transfer(Time time, int tno) {
 		if (selectedBooking != null) {

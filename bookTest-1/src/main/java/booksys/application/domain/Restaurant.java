@@ -33,10 +33,14 @@ class Restaurant {
 		return bm.getAllBookings();
 	}
 
-	boolean checkUser(String userId, String pw) {
+	String checkUser(String userId, String pw) {
 		return lm.checkUser(userId, pw);
 	}
 
+	String kakaoLogin(String userId, String userName) {
+		return lm.kakaoLogin(userId, userName);
+	}
+	
 	Customer getCustomer(String name, String phone) {
 		return cm.getCustomer(name, phone);
 	}

@@ -38,16 +38,7 @@ public class RestApiController {
 		return ba.getTableNumber();
 	}
 	
-	@RequestMapping(value = "/session_check")
-	public String sessionCheck(HttpServletRequest request) throws Exception {
-		HttpSession session = request.getSession();
-		String a = (String)session.getAttribute("id");
-		if (a != null) {
-			return (String)session.getAttribute("id");
-		} else {
-			return "false";
-		}
-	}
+
 	
 	
 	@PostMapping("/reservation/new_reservation")

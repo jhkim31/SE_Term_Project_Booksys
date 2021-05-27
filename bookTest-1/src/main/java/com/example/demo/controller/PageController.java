@@ -21,8 +21,7 @@ public class PageController {
 			return "/booking/booking.html";
 		} else {
 			return "member/login.html";
-		}
-		
+		}	
 	}
 	
 	@RequestMapping(value = "/booking/cancel_booking")
@@ -62,17 +61,8 @@ public class PageController {
 	}
 	
 	@RequestMapping(value = "/")
-	public String Main_page(HttpServletRequest request) throws Exception {
-//		HttpSession session = request.getSession();
-//		String a = (String)session.getAttribute("id");
-//		if (a != null) {
-//			return "/Main.html";
-//		} else {
-//			return "member/login.html";
-//		}
-		
+	public String Main_page(HttpServletRequest request) throws Exception {		
 		return "Main.html";
-		
 	}
 	
 	@RequestMapping(value = "/menu")
@@ -120,7 +110,6 @@ public class PageController {
 		} else {
 			return "member/login.html";
 		}
-		
 	}
 	
 	@RequestMapping(value = "/login_page")
@@ -151,7 +140,66 @@ public class PageController {
 //		} else {
 //			return "member/login.html";
 //		}
-		return "member/adminPage.html";
+		return "/admin/adminPage.html";
+	}
+	
+	@RequestMapping(value = "/admin_menu")
+	public String admin_menu(HttpServletRequest request) throws Exception {
+//		HttpSession session = request.getSession();
+//		String a = (String)session.getAttribute("id");
+//		if (a != null) {
+//			if ( ((String)session.getAttribute("role")).equals("admin") ) {
+//				return "member/adminPage.html";
+//			} else {
+//				return "/";
+//			}			
+//		} else {
+//			return "member/login.html";
+//		}
+		return "/admin/admin_menu_page.html";
+	}
+	
+	@RequestMapping(value = "/admin_review")
+	public String admin_review(HttpServletRequest request) throws Exception {
+//		HttpSession session = request.getSession();
+//		String a = (String)session.getAttribute("id");
+//		if (a != null) {
+//			if ( ((String)session.getAttribute("role")).equals("admin") ) {
+//				return "member/adminPage.html";
+//			} else {
+//				return "/";
+//			}			
+//		} else {
+//			return "member/login.html";
+//		}
+		return "/admin/admin_review_page.html";
+	}
+	
+	@RequestMapping(value = "/admin_table")
+	public String admin_table(HttpServletRequest request) throws Exception {
+//		HttpSession session = request.getSession();
+//		String a = (String)session.getAttribute("id");
+//		if (a != null) {
+//			if ( ((String)session.getAttribute("role")).equals("admin") ) {
+//				return "member/adminPage.html";
+//			} else {
+//				return "/";
+//			}			
+//		} else {
+//			return "member/login.html";
+//		}
+		return "/admin/admin_table_page.html";
+	}
+	
+	@RequestMapping(value = "/mypage")
+	public String mypage(HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		String a = (String)session.getAttribute("id");
+		if (a != null) {
+			return "/member/mypage.html";
+		} else {
+			return "/member/login.html";
+		}
 	}
 	
 	

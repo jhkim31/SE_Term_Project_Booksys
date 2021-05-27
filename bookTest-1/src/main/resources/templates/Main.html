@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <!-- Bootstrap v5 -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
@@ -44,12 +45,6 @@
 <body>
 	<div id="top-navigation-bar"></div>
 	<h1>메인 페이지</h1>
-	<button id="get_string">data get from /String</button>
-	<button id="get_json">data get from /Json</button>
-	<button id="get_vector">get table data from db</button>
-	<br>
-	<a href="/sample/booking">go to booking tab</a>
-	<a href="/sample/menu">go to menu</a>
 
 	<form id="myForm">
 		<input type="time" id="appt" name="appt" min="18:00" max="22:00"
@@ -57,44 +52,6 @@
 			id="getTime">
 	</form>
 	<script src="/top_navigation.js"></script>
-	<script>
-	a = document.getElementById('get_string')
-	b = document.getElementById('get_json')
-	c = document.getElementById('get_vector')	
-	
-	
-	a.addEventListener("click", () => {
-		fetch('/String')
-		.then(e => {
-			return Promise.all([e.ok, e.text()])
-			})
-		.then(([responseOk, body]) => {
-		console.log(body)
-	})
-	})
-	b.addEventListener("click", () => {
-		fetch('/Json')
-		.then(e => e.json())
-		.then(data => console.log(data))
-	})
-	
-	c.addEventListener('click', () =>{
-		fetch('/get_table')
-		.then(e => e.json())
-		.then(data => console.log(data))
-	})
-	var form = document.getElementById("myForm");
-	function handleForm(event) { event.preventDefault(); }
-	form.addEventListener('submit', handleForm);
-
-	d = document.getElementById('getTime')
-	d.addEventListener('click', () => {
-		val = document.getElementById('appt').value
-		if (val <= "22:00" && val >= "18:00" && val.slice(3, 5) % 30 == 0) {
-			console.log(document.getElementById('appt').value + ":00")
-		}
-
-	})
-	</script>
+	<script src = "/Main.js"></script>
 </body>
 </html>

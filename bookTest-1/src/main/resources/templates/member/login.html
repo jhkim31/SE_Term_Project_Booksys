@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <title>LoginPage</title>
 <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
 <style>
@@ -41,11 +42,22 @@
 </style>
 </head>
 <body>
-	<h1>메인</h1>
-	<input type="text" name="" id="userId">
-	<input type="password" name="" id="userPass">
-	<button id="loginBtn">로그인</button>
-	<button id="joinBtn">회원가입</button>
+	<a id="custom-login-btn" href="javascript:loginWithKakao()"></a>
 	<script src='login.js'></script>
+	<script>
+		Kakao.API.request({
+			url : '/v1/user/unlink',
+			success : function(response) {
+				console.log(response);
+				document.getElementById('custom-login-btn').click()
+			},
+			fail : function(error) {
+				console.log(error);
+				document.getElementById('custom-login-btn').click()
+			},
+		});
+		
+		
+	</script>
 </body>
 </html>

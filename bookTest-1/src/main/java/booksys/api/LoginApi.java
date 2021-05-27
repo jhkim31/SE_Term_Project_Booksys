@@ -14,7 +14,11 @@ public class LoginApi {
 		bs = BookingSystem.getInstance();
 	}
 	
-	public boolean checkUser(String userId, String pw) {
+	public String checkUser(String userId, String pw) {
 		return bs.checkUser(userId, pw);
+	}
+	
+	public String kakaoLogin(String userId, String userName) {
+		return bs.kakaoLogin(userId, userName);
 	}
 }
