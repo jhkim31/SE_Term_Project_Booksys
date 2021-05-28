@@ -85,18 +85,18 @@ public class BookingMapper {
 				v.add(r);
 			}
 			rset.close();
-			rset = stmt.executeQuery("SELECT * FROM WalkIn");
-			while (rset.next()) {
-				int oid = rset.getInt(1);
-				int covers = rset.getInt(2);
-				Date bdate = rset.getDate(3);
-				Time btime = rset.getTime(4);
-				int table = rset.getInt(5);
-				PersistentTable t = TableMapper.getInstance().getTableForOid(table);
-				PersistentWalkIn w = new PersistentWalkIn(oid, covers, bdate, btime, t);
-				v.add(w);
-			}
-			rset.close();
+//			rset = stmt.executeQuery("SELECT * FROM WalkIn");
+//			while (rset.next()) {
+//				int oid = rset.getInt(1);
+//				int covers = rset.getInt(2);
+//				Date bdate = rset.getDate(3);
+//				Time btime = rset.getTime(4);
+//				int table = rset.getInt(5);
+//				PersistentTable t = TableMapper.getInstance().getTableForOid(table);
+//				PersistentWalkIn w = new PersistentWalkIn(oid, covers, bdate, btime, t);
+//				v.add(w);
+//			}
+//			rset.close();
 			stmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -123,16 +123,42 @@ public class BookingMapper {
 				v.add(r);
 			}
 			rset.close();
-			rset = stmt.executeQuery("SELECT * FROM WalkIn WHERE date='" + date + "'");
+//			rset = stmt.executeQuery("SELECT * FROM WalkIn WHERE date='" + date + "'");
+//			while (rset.next()) {
+//				int oid = rset.getInt(1);
+//				int covers = rset.getInt(2);
+//				Date bdate = rset.getDate(3);
+//				Time btime = rset.getTime(4);
+//				int table = rset.getInt(5);
+//				PersistentTable t = TableMapper.getInstance().getTableForOid(table);
+//				PersistentWalkIn w = new PersistentWalkIn(oid, covers, bdate, btime, t);
+//				v.add(w);
+//			}
+//			rset.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return v;
+	}
+	
+	public Vector getMyBookings(String userId) {
+		Vector v = new Vector();
+		try {
+			Statement stmt = Database.getInstance().getConnection().createStatement();
+			ResultSet rset = stmt.executeQuery("SELECT * FROM Reservation WHERE userId='" + userId+ "'");
 			while (rset.next()) {
 				int oid = rset.getInt(1);
 				int covers = rset.getInt(2);
 				Date bdate = rset.getDate(3);
 				Time btime = rset.getTime(4);
 				int table = rset.getInt(5);
+				int cust = rset.getInt(6);
+				Time atime = rset.getTime(7);
 				PersistentTable t = TableMapper.getInstance().getTableForOid(table);
-				PersistentWalkIn w = new PersistentWalkIn(oid, covers, bdate, btime, t);
-				v.add(w);
+				PersistentCustomer c = CustomerMapper.getInstance().getCustomerForOid(cust);
+				PersistentReservation r = new PersistentReservation(oid, covers, bdate, btime, t, c, atime);
+				v.add(r);
 			}
 			rset.close();
 			stmt.close();
@@ -143,12 +169,12 @@ public class BookingMapper {
 	}
 
 	public PersistentReservation createReservation(int covers, Date date, Time time, Table table, Customer customer,
-			Time arrivalTime) {
+			Time arrivalTime, String userId) {
 		int oid = Database.getInstance().getId();
-		performUpdate("INSERT INTO Reservation (covers, date, time, table_id, customer_id, arrivalTime)" + "VALUES ('"
+		performUpdate("INSERT INTO Reservation (covers, date, time, table_id, customer_id, arrivalTime, userId)" + "VALUES ('"
 				+ covers + "', '" + date + "', '" + time + "', '" + ((PersistentTable) table).getId() + "', '"
 				+ ((PersistentCustomer) customer).getId() + "', "
-				+ (arrivalTime == null ? "NULL" : ("'" + arrivalTime.toString() + "'")) + ")");
+				+ (arrivalTime == null ? "NULL" : ("'" + arrivalTime.toString() + "'")) + ",'" + userId + "')");
 		return new PersistentReservation(oid, covers, date, time, table, customer, arrivalTime);
 	}
 
@@ -197,6 +223,30 @@ public class BookingMapper {
 		String table = b instanceof Reservation ? "Reservation" : "WalkIn";
 		performUpdate("DELETE FROM " + table + " WHERE oid = '" + ((PersistentBooking) b).getId() + "'");
 	}
+	
+	public void deleteBooking_oid(String oid) {
+		performUpdate("DELETE FROM Reservation" + " WHERE oid = '" + oid + "'");
+	}
+	
+	public void updateReservation(Vector<String> v) {
+		StringBuffer sql = new StringBuffer(128);
+
+		sql.append("UPDATE Reservation");
+		sql.append(" SET ");
+		sql.append(" covers = ");
+		sql.append(v.get(0));
+		sql.append(", date = '");
+		sql.append(v.get(1));
+		sql.append("', time = '");
+		sql.append(v.get(2));
+		sql.append("', table_id = ");
+		sql.append(v.get(3));
+		sql.append(" WHERE oid = ");
+		sql.append(v.get(4));
+		
+		performUpdate(sql.toString());
+	}
+	
 
 	private void performUpdate(String sql) {
 		try {

@@ -49,6 +49,15 @@ public class TableMapper {
 	}
 
 	// Singleton:
+	private void performUpdate(String sql) {
+		try {
+			Statement stmt = Database.getInstance().getConnection().createStatement();
+			int updateCount = stmt.executeUpdate(sql);
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	private static TableMapper uniqueInstance;
 
@@ -57,6 +66,41 @@ public class TableMapper {
 			uniqueInstance = new TableMapper();
 		}
 		return uniqueInstance;
+	}
+
+	public boolean addTable(Vector<String> v) {
+		try {
+			performUpdate("insert into `Table` (`number`, places) values(" + v.get(0) + ", " + v.get(1) + ")");
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	public boolean deleteTable(String number) {
+		try {
+			performUpdate("delete from `Table` where oid = " + number);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	public boolean updateTable(Vector<String> v) {
+		try {
+			StringBuffer sql = new StringBuffer(128);
+
+			sql.append("update `Table` set places =");
+			sql.append(v.get(1));
+			sql.append(" WHERE number = ");
+			sql.append(v.get(0));
+
+			performUpdate(sql.toString());
+
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	public PersistentTable getTable(int tno) {
@@ -101,12 +145,12 @@ public class TableMapper {
 	}
 
 	public Vector getTableNumbers() {
-		Vector<int []> v = new Vector<int []>();
+		Vector<int[]> v = new Vector<int[]>();
 		try {
 			Statement stmt = Database.getInstance().getConnection().createStatement();
 			ResultSet rset = stmt.executeQuery("SELECT * FROM `Table` ORDER BY number");
 			while (rset.next()) {
-				int[] tmp = {rset.getInt(1), rset.getInt(2), rset.getInt(3)};
+				int[] tmp = { rset.getInt(1), rset.getInt(2), rset.getInt(3) };
 //				v.addElement(new Integer(rset.getInt(2)));
 				v.addElement(tmp);
 			}

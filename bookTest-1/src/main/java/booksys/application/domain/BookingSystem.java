@@ -72,9 +72,31 @@ public class BookingSystem {
 		notifyObservers();
 	}
 
-	public boolean makeReservation(int covers, Date date, Time time, int tno, String name, String phone) {
+	public boolean makeReservation(int covers, Date date, Time time, int tno, String name, String phone, String userId) {
 		try {
-			restaurant.makeReservation(covers, date, time, tno, name, phone);
+			restaurant.makeReservation(covers, date, time, tno, name, phone, userId);
+			return true;
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
+	}
+	
+	public boolean addTable(Vector<String> v) {
+		return restaurant.addTable(v);
+	}
+	
+	public boolean deleteTable(String number) {
+		return restaurant.deleteTable(number);
+	}
+	
+	public boolean updateTable(Vector<String> v) {
+		return restaurant.updateTable(v);
+	}
+	
+	public boolean updateReservation(Vector<String> v) {
+		try {
+			restaurant.updateReservation(v);
 			return true;
 		} catch (Exception e) {
 			System.out.println(e);
@@ -91,6 +113,11 @@ public class BookingSystem {
 		return currentBookings;
 	}
 	
+	public Vector getMyBookingList(String userId) {
+		currentBookings = restaurant.getMyBookings(userId);
+		return currentBookings;
+	}
+	
 	public Vector getAllBookingList() {
 		currentBookings = restaurant.getAllBookings();
 		return currentBookings;
@@ -99,6 +126,16 @@ public class BookingSystem {
 	public boolean removeBooking(int index) {
 		try {
 			restaurant.removeBooking((Booking)currentBookings.get(index));
+			return true;
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
+	}
+	
+	public boolean deleteBooking(String oid) {
+		try {
+			restaurant.removeBooking(oid);
 			return true;
 		} catch (Exception e) {
 			System.out.println(e);
@@ -153,8 +190,8 @@ public class BookingSystem {
 		return a;
 	}
 
-	public void addMenu(int mid, String name, int price) {
-		restaurant.addMenu(mid, name, price);
+	public void addMenu(int mid, String name, int price, String comment, String image) {
+		restaurant.addMenu(mid, name, price, comment, image);
 	}
 	
 	public void deleteMenu(Menu m) {
@@ -169,6 +206,27 @@ public class BookingSystem {
 		Vector menulist = restaurant.getMenu();
 		for (Object m : menulist) {
 			if(((Menu)m).getMid()==mid) return (Menu)m;
+		}
+		return null;
+	}
+	
+	public Vector getReviewList() {
+		Vector a = restaurant.getReview();
+		return a;
+	}
+	
+	public void addReview(int rid, String user, Date date, Time time, String content, int point) {
+		restaurant.addReview(rid, user, date, time, content, point);
+	}
+	
+	public void deleteReview(int o) {
+		restaurant.deleteReview(o);
+	}
+	
+	public Review findReview(int rid) {
+		Vector reviewlist = restaurant.getReview();
+		for (Object r : reviewlist) {
+			if(((Review)r).getRid()==rid) return (Review)r;
 		}
 		return null;
 	}

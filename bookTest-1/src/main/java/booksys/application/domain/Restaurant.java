@@ -20,15 +20,32 @@ class Restaurant {
 	TableMapper tm = TableMapper.getInstance();
 	LoginMapper lm = LoginMapper.getInstance();
 	MenuMapper mm = MenuMapper.getInstance();
+	ReviewMapper rm = ReviewMapper.getInstance();
 
-	
 	public Vector getReservationNumber(Date sD, Date eD) {
 		return bm.getReservationNumber(sD, eD);
 	}
+
 	Vector getBookings(Date date) {
 		return bm.getBookings(date);
 	}
-	
+
+	boolean addTable(Vector<String> v) {
+		return tm.addTable(v);
+	}
+
+	boolean deleteTable(String number) {
+		return tm.deleteTable(number);
+	}
+
+	boolean updateTable(Vector<String> v) {
+		return tm.updateTable(v);
+	}
+
+	Vector getMyBookings(String userId) {
+		return bm.getMyBookings(userId);
+	}
+
 	Vector getAllBookings() {
 		return bm.getAllBookings();
 	}
@@ -40,7 +57,7 @@ class Restaurant {
 	String kakaoLogin(String userId, String userName) {
 		return lm.kakaoLogin(userId, userName);
 	}
-	
+
 	Customer getCustomer(String name, String phone) {
 		return cm.getCustomer(name, phone);
 	}
@@ -53,10 +70,15 @@ class Restaurant {
 		return TableMapper.getInstance().getTableNumbers();
 	}
 
-	public Booking makeReservation(int covers, Date date, Time time, int tno, String name, String phone) {
+	public Booking makeReservation(int covers, Date date, Time time, int tno, String name, String phone,
+			String userId) {
 		Table t = getTable(tno);
 		Customer c = getCustomer(name, phone);
-		return bm.createReservation(covers, date, time, t, c, null);
+		return bm.createReservation(covers, date, time, t, c, null, userId);
+	}
+
+	public void updateReservation(Vector<String> v) {
+		bm.updateReservation(v);
 	}
 
 	public Booking makeWalkIn(int covers, Date date, Time time, int tno) {
@@ -72,13 +94,17 @@ class Restaurant {
 		bm.deleteBooking(b);
 	}
 
+	public void removeBooking(String oid) {
+		bm.deleteBooking_oid(oid);
+	}
+
 	public Vector getMenu() {
 		Vector menulist = mm.getMenuList();
 		return menulist;
 	}
 
-	public void addMenu(int mid, String name, int price) {
-		mm.createMenu(mid, name, price);
+	public void addMenu(int mid, String name, int price, String comment, String image) {
+		mm.createMenu(mid, name, price, comment, image);
 	}
 
 	public void deleteMenu(Menu m) {
@@ -87,5 +113,19 @@ class Restaurant {
 
 	public void updateMenu(Menu m) {
 		mm.updateMenu(m);
+	}
+
+	public Vector getReview() {
+		Vector reviewlist = rm.getReviewList();
+		return reviewlist;
+	}
+
+	public void addReview(int rid, String user, Date date, Time time, String content, int point) {
+		rm.addReview(rid, user, date, time, content, point);
+	}
+
+	public void deleteReview(int o) {
+		rm.deleteReview(o);
+
 	}
 }

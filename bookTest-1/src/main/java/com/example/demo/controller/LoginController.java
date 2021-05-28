@@ -48,13 +48,13 @@ public class LoginController {
 			@RequestParam String userName,
 			HttpServletRequest request
 			) {
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession();	 
 		String returnVal = la.kakaoLogin(userId, userName); 
 		
 		if (userName.length() != 0) {
 			session.setAttribute("id", userId);
 			session.setAttribute("userName", userName);
-			if (userId.equals("1746254379")) {
+			if (userId.equals("1746254379") || userId.equals("1746937133") || userId.equals("1746960874") || userId.equals("1747235624")) {
 				session.setAttribute("role", "admin");
 			} else {
 				session.setAttribute("role", "user");

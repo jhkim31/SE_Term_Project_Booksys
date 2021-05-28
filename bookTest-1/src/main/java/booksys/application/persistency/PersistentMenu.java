@@ -5,8 +5,8 @@ import booksys.application.domain.Menu;
 public class PersistentMenu extends Menu {
 	private int mid;
 
-	public PersistentMenu(int m, String n, int p) {
-		super(m, n, p);
+	public PersistentMenu(int m, String n, int p, String c, String i) {
+		super(m, n, p, c, i);
 		mid = m;
 	}
 

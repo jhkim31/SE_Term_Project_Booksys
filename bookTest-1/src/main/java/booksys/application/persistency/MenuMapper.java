@@ -1,6 +1,7 @@
 package booksys.application.persistency;
 
 import java.sql.Date;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -35,7 +36,9 @@ public class MenuMapper {
 				int mid = rset.getInt(1);
 				String name = rset.getString(2);
 				int price = rset.getInt(3);
-				PersistentMenu r = new PersistentMenu(mid, name, price);
+				String comment = rset.getString(4);
+				String image = rset.getString(5);
+				PersistentMenu r = new PersistentMenu(mid, name, price, comment, image);
 				v.add(r);
 			}
 			rset.close();
@@ -46,12 +49,12 @@ public class MenuMapper {
 		return v;
 	}
 
-	public PersistentMenu createMenu(int mid, String name, int price) {
+	public PersistentMenu createMenu(int mid, String name, int price, String comment, String image) {
 		int oid = Database.getInstance().getId();
-		performUpdate("INSERT INTO Menu (mid, name, price)" + "VALUES ('" + mid + "', '" + name + "', '" + price
-				+ "', '" + ")");
+		performUpdate("INSERT INTO Menu (name, price, comment, image) VALUES ('" + name + "', '" + price
+				+ "', '" + comment + "', '" + image + "')");
 
-		return new PersistentMenu(mid, name, price);
+		return new PersistentMenu(mid, name, price, comment, image);
 	}
 
 	public void updateMenu(Menu m) {
@@ -67,7 +70,11 @@ public class MenuMapper {
 		sql.append(pm.getName().toString());
 		sql.append("', price = '");
 		sql.append(pm.getPrice());
-
+		sql.append("', comment = '");
+		sql.append(pm.getComment());
+		sql.append("', image = '");
+		sql.append(pm.getImage());
+		
 		performUpdate(sql.toString());
 	}
 

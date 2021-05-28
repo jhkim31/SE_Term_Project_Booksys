@@ -38,9 +38,35 @@ public class RestApiController {
 		return ba.getTableNumber();
 	}
 	
+	@PostMapping("/table/add_table")
+	public boolean addTable(
+			@RequestParam String number,
+			@RequestParam String places
+			) {
+		Vector<String> v = new Vector();
+		v.add(number);
+		v.add(places);
+		return ba.addTable(v); 		
+	}
+	
+	@PostMapping("/table/delete_table")
+	public boolean deleteTable(
+			@RequestParam String number
+			) {
+		return ba.deleteTable(number); 		
+	}
+	
+	@PostMapping("/table/update_table")
+	public boolean updateTable(
+			@RequestParam String number,
+			@RequestParam String places
+			) {
+		Vector<String> v = new Vector();
+		v.add(number);
+		v.add(places);
+		return ba.updateTable(v); 		
+	}
 
-	
-	
 	@PostMapping("/reservation/new_reservation")
 	public boolean setReservation(
 			@RequestParam int covers,
@@ -48,15 +74,30 @@ public class RestApiController {
 			@RequestParam String time,
 			@RequestParam int tno,
 			@RequestParam String name,
-			@RequestParam String phone
+			@RequestParam String phone,
+			HttpServletRequest request
 			) {
-		System.out.println(covers);
-		System.out.println(date);
-		System.out.println(time);
-		System.out.println(tno);
-		System.out.println(name);
-		System.out.println(phone);		
-		return ba.addReservation(covers, date, time, tno,name,phone); 		
+		HttpSession session = request.getSession();
+		System.out.println((String)session.getAttribute("id"));
+
+		return ba.addReservation(covers, date, time, tno,name,phone, (String)session.getAttribute("id")); 		
+	}
+	
+	@PostMapping("/reservation/update_reservation")
+	public boolean updateReservation(
+			@RequestParam String covers,
+			@RequestParam String date,
+			@RequestParam String time,
+			@RequestParam String tno,
+			@RequestParam String oid
+			) {
+		Vector<String> v = new Vector();
+		v.add(covers);
+		v.add(date);
+		v.add(time);
+		v.add(tno);
+		v.add(oid);
+		return ba.updateReservation(v); 		
 	}
 	
 	@RequestMapping(value = "/booking/get_booking_list")
@@ -65,12 +106,21 @@ public class RestApiController {
 		return ba.getBookingList(request.getParameter("date"));
 	}
 	
+	@RequestMapping(value = "/booking/get_my_booking_list")
+	public Vector getMyReservationList(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		System.out.println((String)session.getAttribute("id"));
+		return ba.getMyBookingList((String)session.getAttribute("id"));
+	}
+	
 	@RequestMapping("/booking/get_reservation_number")
 	public Vector reservationNumber(HttpServletRequest request) {
 		String sDate = request.getParameter("sDate");
 		String eDate = request.getParameter("eDate");
 		return ba.getReservationNumber(sDate, eDate);
 	}
+	
+	
 	
 	@RequestMapping(value = "/booking/get_all_booking_list")
 	public Vector getAllReservationList(HttpServletRequest request) {
@@ -85,30 +135,79 @@ public class RestApiController {
 		return ba.cancelReservation(index); 		
 	}
 	
+	@PostMapping("/reservation/delete_reservation")
+	public boolean cancelReservation(
+			@RequestParam String oid
+			) {	
+		return ba.deleteReservation(oid); 		
+	}
+	
 	@PostMapping("/reservation/record_arrival")
 	public boolean recordArrival(
 			@RequestParam int index
 			) {	
 		return ba.recordArrival(index); 		
 	}
-	
-
 	@RequestMapping("/menu/get_menu_list")
 	public Vector getMenuList() {
 		return ba.getMenuList();
 	}
 
-	@RequestMapping("/menu/add_menu")
-	public boolean addMenu(@RequestParam int mid, @RequestParam String name, @RequestParam int price) {
+	@PostMapping("/menu/add_menu")
+	public boolean addMenu(
+			@RequestParam int mid, 
+			@RequestParam String name, 
+			@RequestParam int price,
+			@RequestParam String comment, 
+			@RequestParam String image
+			) {
 		System.out.println(mid);
 		System.out.println(name);
 		System.out.println(price);
-		return ba.addMenu(mid, name, price);
+		System.out.println(comment);
+		System.out.println(image);
+		return ba.addMenu(mid, name, price, comment, image);
 	}
 
-	@RequestMapping("/menu/delete_menu")
-	public boolean deleteMenu(@RequestParam int mid) {
+	@PostMapping("/menu/delete_menu")
+	public boolean deleteMenu(
+			@RequestParam int mid
+			) {
 		System.out.println(mid);
 		return ba.deleteMenu(mid);
+	}
+
+	@RequestMapping("/review/get_review_list")
+	public Vector getReviewList() {
+		return ba.getReviewList();
+	}
+
+	@PostMapping("/review/add_review")
+	public boolean addReview(
+			@RequestParam int rid,
+			@RequestParam String user, 
+			@RequestParam String date,
+			@RequestParam String time, 
+			@RequestParam String content, 
+			@RequestParam int point,
+			HttpServletRequest request
+			) {
+		HttpSession session = request.getSession();
+		System.out.println((String)session.getAttribute("id"));
+		System.out.println(user);
+		System.out.println(date);
+		System.out.println(time);
+		System.out.println(content);
+		System.out.println(point);
+		return ba.addReview(rid, (String)session.getAttribute("id"), date, time, content, point);
+//		return ba.addReview(rid, user, date, time, content, point);
+	}
+
+	@PostMapping("/review/delete_review")
+	public boolean deleteReview(
+			@RequestParam int rid
+			) {
+		System.out.println(rid);
+		return ba.deleteReview(rid);
 	}
 }

@@ -122,9 +122,9 @@ public class PageController {
 		return "/table.html";
 	}
 	
-	@RequestMapping(value = "/register_page")
+	@RequestMapping(value = "/main2")
 	public String register_page(HttpServletRequest request) throws Exception {
-		return "/member/register.html";
+		return "/sample/Main2.html";
 	}
 	
 	@RequestMapping(value = "/admin_page")
