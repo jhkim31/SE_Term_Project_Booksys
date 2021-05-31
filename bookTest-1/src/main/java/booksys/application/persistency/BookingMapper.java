@@ -63,6 +63,38 @@ public class BookingMapper {
 		}
 		return v;
 	}
+	
+	public Vector getReservationPrice(Date sD, Date eD) {
+		System.out.println(sD.after(eD));
+		System.out.println(sD.before(eD));
+		Calendar c1 = Calendar.getInstance();
+		Calendar c2 = Calendar.getInstance();
+		c1.setTime(sD);
+		c2.setTime(eD);
+		
+		Vector v = new Vector();
+		try {
+			Statement stmt = Database.getInstance().getConnection().createStatement();
+			
+			
+			while(c1.compareTo(c2) != 1) {
+				Date d = new Date(c1.getTimeInMillis());
+				String query = "select sum(totalPrice) from Reservation \n"
+						+ "where date = '" + d + "'";
+				ResultSet rset = stmt.executeQuery(query);
+				v.add(d);
+				c1.add(Calendar.DATE, 1);
+				if(rset.next()) {
+					v.add(rset.getInt(1));
+				}
+			}
+			
+			return v;
+		} catch (Exception e) {
+
+		}
+		return v;
+	}
 
 	public Vector getAllBookings() {
 		Vector v = new Vector();
@@ -169,12 +201,13 @@ public class BookingMapper {
 	}
 
 	public PersistentReservation createReservation(int covers, Date date, Time time, Table table, Customer customer,
-			Time arrivalTime, String userId) {
+			Time arrivalTime, String userId, int[] menuArr) {
 		int oid = Database.getInstance().getId();
-		performUpdate("INSERT INTO Reservation (covers, date, time, table_id, customer_id, arrivalTime, userId)" + "VALUES ('"
+		performUpdate("INSERT INTO Reservation (covers, date, time, table_id, customer_id, arrivalTime, userId, menu1, menu2, menu3, menu4, menu5, menu6, menu7, menu8, totalPrice)" + "VALUES ('"
 				+ covers + "', '" + date + "', '" + time + "', '" + ((PersistentTable) table).getId() + "', '"
 				+ ((PersistentCustomer) customer).getId() + "', "
-				+ (arrivalTime == null ? "NULL" : ("'" + arrivalTime.toString() + "'")) + ",'" + userId + "')");
+				+ (arrivalTime == null ? "NULL" : ("'" + arrivalTime.toString() + "'")) + ",'" + userId + "', '" + menuArr[0] + "', '" + menuArr[1] + "', '" 
+				+ menuArr[2] + "', '" + menuArr[3] + "', '" + menuArr[4] + "', '" + menuArr[5] + "', '" + menuArr[6] + "', '" + menuArr[7] + "', '" + menuArr[8] + "')");
 		return new PersistentReservation(oid, covers, date, time, table, customer, arrivalTime);
 	}
 

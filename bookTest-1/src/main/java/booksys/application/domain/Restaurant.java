@@ -25,6 +25,10 @@ class Restaurant {
 	public Vector getReservationNumber(Date sD, Date eD) {
 		return bm.getReservationNumber(sD, eD);
 	}
+	
+	public Vector getReservationPrice(Date sD, Date eD) {
+		return bm.getReservationPrice(sD, eD);
+	}
 
 	Vector getBookings(Date date) {
 		return bm.getBookings(date);
@@ -71,10 +75,10 @@ class Restaurant {
 	}
 
 	public Booking makeReservation(int covers, Date date, Time time, int tno, String name, String phone,
-			String userId) {
+			String userId, int[] menuArr) {
 		Table t = getTable(tno);
 		Customer c = getCustomer(name, phone);
-		return bm.createReservation(covers, date, time, t, c, null, userId);
+		return bm.createReservation(covers, date, time, t, c, null, userId, menuArr);
 	}
 
 	public void updateReservation(Vector<String> v) {

@@ -75,12 +75,21 @@ public class RestApiController {
 			@RequestParam int tno,
 			@RequestParam String name,
 			@RequestParam String phone,
+			@RequestParam int menu1,
+			@RequestParam int menu2,
+			@RequestParam int menu3,
+			@RequestParam int menu4,
+			@RequestParam int menu5,
+			@RequestParam int menu6,
+			@RequestParam int menu7,
+			@RequestParam int menu8,
+			@RequestParam int totalPrice,
 			HttpServletRequest request
 			) {
 		HttpSession session = request.getSession();
 		System.out.println((String)session.getAttribute("id"));
-
-		return ba.addReservation(covers, date, time, tno,name,phone, (String)session.getAttribute("id")); 		
+		int[] menuArr = {menu1, menu2, menu3, menu4, menu5, menu6, menu7, menu8, totalPrice};
+		return ba.addReservation(covers, date, time, tno,name,phone, (String)session.getAttribute("id"), menuArr); 		
 	}
 	
 	@PostMapping("/reservation/update_reservation")
@@ -120,7 +129,12 @@ public class RestApiController {
 		return ba.getReservationNumber(sDate, eDate);
 	}
 	
-	
+	@RequestMapping("/booking/get_reservation_price")
+	public Vector reservationPrice(HttpServletRequest request) {
+		String sDate = request.getParameter("sDate");
+		String eDate = request.getParameter("eDate");
+		return ba.getReservationPrice(sDate, eDate);
+	}
 	
 	@RequestMapping(value = "/booking/get_all_booking_list")
 	public Vector getAllReservationList(HttpServletRequest request) {
@@ -184,8 +198,7 @@ public class RestApiController {
 
 	@PostMapping("/review/add_review")
 	public boolean addReview(
-			@RequestParam int rid,
-			@RequestParam String user, 
+			@RequestParam int rid, 
 			@RequestParam String date,
 			@RequestParam String time, 
 			@RequestParam String content, 
@@ -194,13 +207,11 @@ public class RestApiController {
 			) {
 		HttpSession session = request.getSession();
 		System.out.println((String)session.getAttribute("id"));
-		System.out.println(user);
 		System.out.println(date);
 		System.out.println(time);
 		System.out.println(content);
 		System.out.println(point);
 		return ba.addReview(rid, (String)session.getAttribute("id"), date, time, content, point);
-//		return ba.addReview(rid, user, date, time, content, point);
 	}
 
 	@PostMapping("/review/delete_review")

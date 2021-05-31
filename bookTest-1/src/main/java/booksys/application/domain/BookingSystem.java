@@ -72,9 +72,9 @@ public class BookingSystem {
 		notifyObservers();
 	}
 
-	public boolean makeReservation(int covers, Date date, Time time, int tno, String name, String phone, String userId) {
+	public boolean makeReservation(int covers, Date date, Time time, int tno, String name, String phone, String userId, int[] menuArr) {
 		try {
-			restaurant.makeReservation(covers, date, time, tno, name, phone, userId);
+			restaurant.makeReservation(covers, date, time, tno, name, phone, userId, menuArr);
 			return true;
 		} catch (Exception e) {
 			System.out.println(e);
@@ -106,6 +106,10 @@ public class BookingSystem {
 	
 	public Vector getReservationNumber(Date sD, Date eD) {
 		return restaurant.getReservationNumber(sD, eD);
+	}
+	
+	public Vector getReservationPrice(Date sD, Date eD) {
+		return restaurant.getReservationPrice(sD, eD);
 	}
 	
 	public Vector getBookingList(Date date) {

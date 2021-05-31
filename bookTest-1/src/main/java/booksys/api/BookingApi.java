@@ -31,11 +31,11 @@ public class BookingApi {
 	}
 
 	public boolean addReservation(int covers, String date, String time, int tno, String name, String phone,
-			String userId) {
+			String userId, int[] menuArr) {
 		Date d = Date.valueOf(date);
 		Time t = Time.valueOf(time);
 
-		return bs.makeReservation(covers, d, t, tno, name, phone, userId);
+		return bs.makeReservation(covers, d, t, tno, name, phone, userId, menuArr);
 	}
 
 	public boolean updateReservation(Vector<String> v) {
@@ -48,6 +48,13 @@ public class BookingApi {
 		Date eD = Date.valueOf(eDate);
 		return bs.getReservationNumber(sD, eD);
 	}
+	
+	public Vector getReservationPrice(String sDate, String eDate) {
+		Date sD = Date.valueOf(sDate);
+		Date eD = Date.valueOf(eDate);
+		return bs.getReservationPrice(sD, eD);
+	}
+	
 
 	public Vector getBookingList(String date) {
 		Date d = Date.valueOf(date);

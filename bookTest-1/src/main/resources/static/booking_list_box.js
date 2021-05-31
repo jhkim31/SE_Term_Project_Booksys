@@ -1,6 +1,8 @@
 /**
  * 
  */
+
+
 window.addEventListener('load', () => {
 	console.log(1)
 	document.getElementById('booking_list_box').innerHTML =
@@ -27,20 +29,20 @@ window.addEventListener('load', () => {
 				console.log(data)
 				index = 0
 				data.forEach(e => {
+					console.log(e)
 					for (i = 1; i < 14; i++) {
 						if (tableArr[0][i].innerText == e.time.slice(0, 5)) {
-							tableArr[e.table.number][i].className += "bookingSection"
-							tableArr[e.table.number][i].innerText = index;
-							tableArr[e.table.number][i + 1].className += "bookingSection"
-							tableArr[e.table.number][i + 1].innerText = index;
-							tableArr[e.table.number][i + 2].className += "bookingSection"
-							tableArr[e.table.number][i + 2].innerText = index;
-							tableArr[e.table.number][i + 3].className += "bookingSection"
-							tableArr[e.table.number][i + 3].innerText = index;
+							tableArr[e.table.number][i].className = "bookingSection"
+							tableArr[e.table.number][i].innerText = e.id;
+							tableArr[e.table.number][i + 1].className = "bookingSection"
+							tableArr[e.table.number][i + 1].innerText = e.id;
+							tableArr[e.table.number][i + 2].className = "bookingSection"
+							tableArr[e.table.number][i + 2].innerText = e.id;
+							tableArr[e.table.number][i + 3].className = "bookingSection"
+							tableArr[e.table.number][i + 3].innerText = e.id;
 							index++;
 						}
 					}
-
 				})
 			})
 	})

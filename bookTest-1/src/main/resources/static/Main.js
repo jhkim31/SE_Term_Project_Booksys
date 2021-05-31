@@ -1,12 +1,20 @@
 /**
  * 
  */	
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = { 
+        center: new kakao.maps.LatLng(37.272459, 126.997522), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
 
-d = document.getElementById('getTime')
-d.addEventListener('click', () => {
-	val = document.getElementById('appt').value
-	if (val <= "22:00" && val >= "18:00" && val.slice(3, 5) % 30 == 0) {
-		console.log(document.getElementById('appt').value + ":00")
-	}
 
-})
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+var markerPosition  = new kakao.maps.LatLng(37.272459, 126.997522); 
+
+
+var marker = new kakao.maps.Marker({
+    position: markerPosition
+});
+
+marker.setMap(map);

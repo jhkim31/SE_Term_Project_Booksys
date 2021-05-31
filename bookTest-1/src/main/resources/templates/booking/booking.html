@@ -22,9 +22,9 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
 	integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
 	crossorigin="anonymous"></script>
-	
-	<!-- Bootstrap v4 -->
-	
+
+<!-- Bootstrap v4 -->
+
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -42,56 +42,226 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
 	integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
 	crossorigin="anonymous"></script>
+
 <title>예약 페이지</title>
 <link rel="stylesheet" href="/booking_list_box.css">
 </head>
 <body>
 	<div id="top-navigation-bar"></div>
-	<div class="row"></div>
-	<div id="booking_list_box"></div>
-	<div class="row">
-		<div class="col-5"></div>
-		<div class="col-2">
-			<h1 class="my-5">예약</h1>
+	<div class="row form-group" style="margin-bottom: 50px"></div>
+	<div style="width: 1000px; margin: 0 auto; margin-bottom: 300px;">
+		<div class="row text-center" style="width: 100%">
+			<div style="width: 30%; float: none; margin: 0 auto">
+				<div>
+					<h1>예약</h1>
+					<br> <br> <label class="form-label">*예약자</label> <input
+						type="text" id="bookingUserName" class="form-control"> <br>
+					<label class="form-label">*날짜</label> <br> <input type="date"
+						id="bookingDate" name="조회날짜" min="2020-12-31" max="2022-12-31"
+						class="form-control">
+					<div id="booking_list_box"></div>
+					<br> <label class="form-label">*시간</label> <select
+						class="custom-select" id = "bookingTime">
+						<option value = "18:00" selected>18:00</option>
+						<option value="18:30">18:30</option>
+						<option value="19:00">19:00</option>
+						<option value="19:30">19:30</option>
+						<option value="20:00">20:00</option>
+						<option value="20:30">20:30</option>
+						<option value="21:00">21:00</option>
+						<option value="21:30">21:30</option>
+						<option value="22:00">22:00</option>
+					</select> <br><br> <label class="form-label">*인원수</label> <select
+						class="form-control" id="bookingCovers">
+						<option>1</option>
+						<option>2</option>
+						<option>3</option>
+						<option>4</option>
+					</select> <br> <label class="form-label">*테이블</label> <select
+						class="form-control" id="bookingTable">
+						<option>1번 테이블</option>
+						<option>2번 테이블</option>
+						<option>3번 테이블</option>
+						<option>4번 테이블</option>
+					</select> <br> <label class="form-label"> *전화번호</label> <input
+						type="text" id="bookingPhoneNumber" class="form-control"
+						placeholder="010-XXXX-XXXX"> <br> <br>
+				</div>
 
-
-
-			<div class="col-5 my-5">
-				<label class="form-label">*이름</label> <input type="text"
-					id="bookingUserName" class="form-control">
 			</div>
+			<table id="shoppingCart"
+				class="table table-condensed table-responsive">
+				<thead>
+					<tr>
+						<th style="width: 60%">메뉴</th>
+						<th style="width: 12%">가격</th>
+						<th style="width: 26%">개수</th>
+					</tr>
+				</thead>
+				<tbody id="menuTable">
+					<tr>
+						<td data-th="Product">
+							<div class="row">
+								<div class="col-md-3 text-left">
+									<img src="/booking/menuImage/menu1.jpg" style="width: 200px;"
+										alt=""
+										class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+								</div>
+								<div class="col-md-9 text-left mt-sm-2">
+									<h4>토마호크 스테이크</h4>
+									<p class="font-weight-light">소 갈비뼈를 따라 뼈와 고기를 길게 도려내 만든
+										스테이크</p>
+								</div>
+							</div>
+						</td>
+						<td data-th="Price" id="menu1_price">36900</td>
+						<td data-th="Quantity"><input type="number"
+							class="form-control form-control-lg text-center" id="menu1"
+							value="0"></td>
 
-			<div class="col-5 my-5">
-				<label class="form-label">*날짜</label> <input type="text"
-					id="bookingDate" class="form-control">
+					</tr>
+					<tr>
+						<td data-th="Product">
+							<div class="row">
+								<div class="col-md-3 text-left">
+									<img src="/booking/menuImage/menu2.jpg" alt=""
+										class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+								</div>
+								<div class="col-md-9 text-left mt-sm-2">
+									<h4>티본 스테이크</h4>
+									<p class="font-weight-light">소의 안심과 등심 사이에 T자 모양의 뼈부분의 부위를
+										이용하여 구운 스테이크 요리</p>
+								</div>
+							</div>
+						</td>
+						<td data-th="Price" id="menu2_price">23900</td>
+						<td data-th="Quantity"><input type="number"
+							class="form-control form-control-lg text-center" value="0"
+							id="menu2"></td>
+
+					</tr>
+					<tr>
+						<td data-th="Product">
+							<div class="row">
+								<div class="col-md-3 text-left">
+									<img src="/booking/menuImage/menu3.jpg" alt=""
+										class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+								</div>
+								<div class="col-md-9 text-left mt-sm-2">
+									<h4>봉골레 파스타</h4>
+									<p class="font-weight-light">육수와 조개를 넣은 이탈리아 본고장 스타일의 해물
+										파스타</p>
+								</div>
+							</div>
+						</td>
+						<td data-th="Price" id="menu3_price">11900</td>
+						<td data-th="Quantity"><input type="number"
+							class="form-control form-control-lg text-center" value="0"
+							id="menu3"></td>
+
+					</tr>
+					<tr>
+						<td data-th="Product">
+							<div class="row">
+								<div class="col-md-3 text-left">
+									<img src="/booking/menuImage/menu4.jpg" alt=""
+										class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+								</div>
+								<div class="col-md-9 text-left mt-sm-2">
+									<h4>샐러드</h4>
+									<p class="font-weight-light">신선한 토마토와 야채들로 이루어진 깔끔한 맛의 샐러드</p>
+								</div>
+							</div>
+						</td>
+						<td data-th="Price" id="menu4_price">6900</td>
+						<td data-th="Quantity"><input type="number"
+							class="form-control form-control-lg text-center" value="0"
+							id="menu4"></td>
+
+					</tr>
+					<tr>
+						<td data-th="Product">
+							<div class="row">
+								<div class="col-md-3 text-left">
+									<img src="/booking/menuImage/menu5.jpg" alt=""
+										class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+								</div>
+								<div class="col-md-9 text-left mt-sm-2">
+									<h4>양송이 수프</h4>
+									<p class="font-weight-light">신선한 양송이로 만든 수프</p>
+								</div>
+							</div>
+						</td>
+						<td data-th="Price" id="menu5_price">6900</td>
+						<td data-th="Quantity"><input type="number"
+							class="form-control form-control-lg text-center" value="0"
+							id="menu5"></td>
+					</tr>
+
+					<tr>
+						<td data-th="Product">
+							<div class="row">
+								<div class="col-md-3 text-left">
+									<img src="/booking/menuImage/menu6.jpg" alt=""
+										class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+								</div>
+								<div class="col-md-9 text-left mt-sm-2">
+									<h4>와인</h4>
+									<p class="font-weight-light">숙성된 포도주로 만든 명품 와인</p>
+								</div>
+							</div>
+						</td>
+						<td data-th="Price" id="menu6_price">15000</td>
+						<td data-th="Quantity"><input type="number"
+							class="form-control form-control-lg text-center" value="0"
+							id="menu6"></td>
+					</tr>
+					<tr>
+						<td data-th="Product">
+							<div class="row">
+								<div class="col-md-3 text-left">
+									<img src="/booking/menuImage/menu7.jpg" alt=""
+										class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+								</div>
+								<div class="col-md-9 text-left mt-sm-2">
+									<h4>에이드</h4>
+									<p class="font-weight-light">청량감이 들어간 시원한 청포도, 자몽, 레몬 에이드</p>
+								</div>
+							</div>
+						</td>
+						<td data-th="Price" id="menu7_price">4900</td>
+						<td data-th="Quantity"><input type="number"
+							class="form-control form-control-lg text-center" value="0"
+							id="menu7"></td>
+					</tr>
+					<tr>
+						<td data-th="Product">
+							<div class="row">
+								<div class="col-md-3 text-left">
+									<img src="/booking/menuImage/menu8.jpg" alt=""
+										class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+								</div>
+								<div class="col-md-9 text-left mt-sm-2">
+									<h4>음료수</h4>
+									<p class="font-weight-light">콜라 및 사이다</p>
+								</div>
+							</div>
+						</td>
+						<td data-th="Price" id="menu8_price">2000</td>
+						<td data-th="Quantity"><input type="number"
+							class="form-control form-control-lg text-center" value="0"
+							id="menu8"></td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="float-right text-right">
+				<h4>전체가격:</h4>
+				<h1 id="totalPrice">0</h1>
 			</div>
-
-			<div class="col-5 my-5">
-				<label class="form-label">*시간</label> <input type="text"
-					id="bookingTime" class="form-control">
-			</div>
-
-			<div class="col-5 my-5">
-				<label class="form-label">*인원수</label> <input type="text"
-					id="bookingCovers" class="form-control">
-			</div>
-
-			<div class="col-5 my-5">
-				<label class="form-label">*테이블</label> <input type="text"
-					id="bookingTable" class="form-control">
-			</div>
-
-			<div class="col-5 my-5">
-				<label class="form-label"> *전화번호</label> <input type="text"
-					id="bookingPhoneNumber" class="form-control">
-			</div>
-
 			<button type="button" class="btn btn-primary" id="bookingBtn">예약하기</button>
 		</div>
-		<div class="col-5"></div>
 	</div>
 	<script src="booking.js"></script>
-	<script src="/booking_list_box.js"></script>
 	<script src="/top_navigation.js"></script>
 </body>
 </html>

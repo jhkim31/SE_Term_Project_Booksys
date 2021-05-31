@@ -27,7 +27,8 @@
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light"
+		style="position: fixed; width: 100%; z-index: 100;">
 		<a class="navbar-brand" href="/">레스토랑 예약 시스템</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
@@ -36,12 +37,10 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 			<div class="navbar-nav">
-			<a class="nav-item nav-link" href="/admin_page">AdminPage</a> 
-				<a class="nav-item nav-link" href="/admin_table">Table</a> 
-				<a class="nav-item nav-link" href="/admin_review">Review</a>
-				<a class="nav-item nav-link" href="/admin_menu">Menu</a> 
-				<a class="nav-item nav-link" href="/sample/menu">SampleMenu</a>
-				<a class="nav-item nav-link" href="/sample/bookin">Booking</a>
+				<a class="nav-item nav-link" href="#today_reservation">일간 예약 현황</a>
+				<a class="nav-item nav-link" href="#today_reservation_price">일간
+					판매 금액</a> <a class="nav-item nav-link" href="#customer_info">고객 예약
+					정보</a> <a class="nav-item nav-link" href="#customer_review">리뷰</a>
 			</div>
 		</div>
 	</nav>
@@ -49,7 +48,7 @@
 		<h1>Admin Page</h1>
 		<p>여기는 관리자만 들어올 수 있습니다</p>
 
-		<h1 class="mt-4">일간 예약 현황</h1>
+		<h1 class="mt-4" id="today_reservation">일간 예약 현황</h1>
 		<div class="card mb-4">
 			<div align="right">
 				<input type="date" id="startDate" name="조회날짜" min="2020-12-31"
@@ -64,7 +63,21 @@
 			</div>
 		</div>
 
-		<h1 class="mt-4">고객 예약 정보</h1>
+
+		<h1 class="mt-4" id="today_reservation_price">일간 판매 금액</h1>
+		<div class="card mb-4">
+			<div align="right"></div>
+			<div class="card-body">
+				<div class="table-responsive">
+					<canvas id="myChart2"></canvas>
+				</div>
+			</div>
+		</div>
+
+
+
+
+		<h1 class="mt-4" id="customer_info">고객 예약 정보</h1>
 
 		<div class="card mb-4">
 			<div class="card-body">
@@ -86,6 +99,36 @@
 				</div>
 			</div>
 		</div>
+
+		<h1 class="mt-4" id="customer_review">고객 리뷰 내역</h1>
+
+		<div class="card mb-4">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-bordered" id="reviewTable" width="100%"
+						cellspacing="0">
+						<thead>
+							<tr>
+								<th>리뷰번호</th>
+								<th>유저 아이디</th>
+								<th>날짜</th>
+								<th>시간</th>
+								<th>리뷰내용</th>
+								<th>별점</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+			<form class="form-inline my-2 my-lg-0">
+				<input class="form-control mr-sm-2" type="search"
+					placeholder="삭제할 리뷰 번호" aria-label="Delete" id = "delete_review_number">
+				<button class="btn btn-outline-success my-2 my-sm-0" type="submit" id = "review_delete">Delete!</button>
+			</form>
+		</div>
+
+
+
 
 	</div>
 	<script

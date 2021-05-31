@@ -54,7 +54,7 @@ public class LoginController {
 		if (userName.length() != 0) {
 			session.setAttribute("id", userId);
 			session.setAttribute("userName", userName);
-			if (userId.equals("1746254379") || userId.equals("1746937133") || userId.equals("1746960874") || userId.equals("1747235624")) {
+			if (userId.equals("1746254379") || userId.equals("1746937133") || userId.equals("1746960874") || userId.equals("1747235624") || userId.equals("1747438648")) {
 				session.setAttribute("role", "admin");
 			} else {
 				session.setAttribute("role", "user");
